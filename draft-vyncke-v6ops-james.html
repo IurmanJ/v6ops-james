@@ -5,9 +5,10 @@
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
 <title>Just Another Measurement of Extension header Survavibility</title>
-<meta content="Ëric Vyncke" name="author">
+<meta content="Éric Vyncke" name="author">
+<meta content="Raphaël Léas" name="author">
 <meta content="
-       TODO Abstract 
+       In 2016,   has measured the drop of packets with IPv6 extension headers. This document presents a slightly different methodology with more recent results. 
     " name="description">
 <meta content="xml2rfc 3.12.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1015,7 +1016,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <td class="right">February 2022</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Vyncke</td>
+<td class="left">Vyncke &amp; Léas</td>
 <td class="center">Expires 20 August 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
@@ -1024,7 +1025,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">V6OPS</dd>
+<dd class="workgroup">IPv6 Operations</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
 <dd class="internet-draft">draft-vyncke-v6ops-james-latest</dd>
 <dt class="label-published">Published:</dt>
@@ -1035,11 +1036,15 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
 <dd class="expires"><time datetime="2022-08-20">20 August 2022</time></dd>
-<dt class="label-authors">Author:</dt>
+<dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
       <div class="author-name">E. Vyncke</div>
 <div class="org">Cisco</div>
+</div>
+<div class="author">
+      <div class="author-name">R. Léas</div>
+<div class="org">Université de Liège</div>
 </div>
 </dd>
 </dl>
@@ -1047,7 +1052,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <h1 id="title">Just Another Measurement of Extension header Survavibility</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">TODO Abstract<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">In 2016, <span>[<a href="#RFC7872" class="xref">RFC7872</a>]</span> has measured the drop of packets with IPv6 extension headers. This document presents a slightly different methodology with more recent results.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1055,14 +1060,14 @@ svg [stroke="fill"], svg [fill^="#fff"] {
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">
-        The latest revision of this draft can be found at <span><a href="https://example.com/LATEST">https://example.com/LATEST</a></span>.
+        The latest revision of this draft can be found at <span><a href="https://evyncke.github.io/v6ops-james/draft-vyncke-v6ops-james.html">https://evyncke.github.io/v6ops-james/draft-vyncke-v6ops-james.html</a></span>.
         Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-vyncke-v6ops-james/">https://datatracker.ietf.org/doc/draft-vyncke-v6ops-james/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">
         Discussion of this document takes place on the
-        IPv6 Operations (V6OPS) Working Group mailing list (<span><a href="mailto:WG@example.com">mailto:WG@example.com</a></span>),
-        which is archived at <span><a href="https://datatracker.ietf.org/wg/v6ops/about/">https://datatracker.ietf.org/wg/v6ops/about/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+        IPv6 Operations Working Group mailing list (<span><a href="mailto:v6ops@ietf.org">mailto:v6ops@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/v6ops/">https://mailarchive.ietf.org/arch/browse/v6ops/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 <p id="section-note.1-4">Source for this draft and an issue tracker can be found at
-        <span><a href="https://github.com/https://github.com/evyncke/v6ops-james">https://github.com/https://github.com/evyncke/v6ops-james</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+        <span><a href="https://github.com/evyncke/v6ops-james">https://github.com/evyncke/v6ops-james</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1116,22 +1121,46 @@ svg [stroke="fill"], svg [fill^="#fff"] {
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-conventions-and-definitions" class="xref">Conventions and Definitions</a></p>
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-methodology" class="xref">Methodology</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="xref">3</a>.  <a href="#name-security-considerations" class="xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-measurements" class="xref">Measurements</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-vantage-points" class="xref">Vantage Points</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
+                    <p id="section-toc.1-1.3.2.1.2.1.1" class="keepWithNext"><a href="#section-3.1.1" class="xref">3.1.1</a>.  <a href="#name-tested-autonomous-systems" class="xref">Tested Autonomous Systems</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-results" class="xref">Results</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
+                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="xref">3.2.1</a>.  <a href="#name-as-dropping-transit-traffic" class="xref">AS dropping transit traffic</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
+                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="xref">3.2.2</a>.  <a href="#name-most-dropped-extension-head" class="xref">Most dropped extension headers</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-security-considerations" class="xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-normative-references" class="xref">Normative References</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#appendix-A" class="xref"></a><a href="#name-acknowledgments" class="xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-informative-references" class="xref">Informative References</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#appendix-B" class="xref"></a><a href="#name-authors-address" class="xref">Author's Address</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="xref"></a><a href="#name-acknowledgments" class="xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#appendix-B" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1142,48 +1171,171 @@ svg [stroke="fill"], svg [fill^="#fff"] {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">TODO Introduction<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">In 2016, <span>[<a href="#RFC7872" class="xref">RFC7872</a>]</span> has measured the drop of packets with IPv6 extension headers. This document presents a slightly different methodology with more recent results.<a href="#section-1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="conventions-and-definitions">
+<div id="methodology">
 <section id="section-2">
-      <h2 id="name-conventions-and-definitions">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+      <h2 id="name-methodology">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-methodology" class="section-name selfRef">Methodology</a>
+    </h2>
+</section>
+</div>
+<div id="measurements">
+<section id="section-3">
+      <h2 id="name-measurements">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-measurements" class="section-name selfRef">Measurements</a>
       </h2>
-<p id="section-2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
-"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
-described in BCP 14 <span>[<a href="#RFC2119" class="xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="xref">RFC8174</a>]</span> when, and only when, they
-appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<div id="vantage-points">
+<section id="section-3.1">
+        <h3 id="name-vantage-points">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-vantage-points" class="section-name selfRef">Vantage Points</a>
+        </h3>
+<p id="section-3.1-1">Several servers were used worldwide (albeit missing South America and Africa as authors were unable to have IPv6 servers in these regions). Table <a href="#table_vantage" class="xref">Table 1</a> lists all the vantage points together with their AS number and country.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<span id="name-all-vantage-as"></span><div id="table_vantage">
+<table class="center" id="table-1">
+          <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-all-vantage-as" class="selfRef">All vantage AS</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">ASN</th>
+              <th class="text-left" rowspan="1" colspan="1">AS Name</th>
+              <th class="text-left" rowspan="1" colspan="1">Country code</th>
+              <th class="text-left" rowspan="1" colspan="1">Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">12414</td>
+              <td class="text-left" rowspan="1" colspan="1">NL-SOLCON SOLCON</td>
+              <td class="text-left" rowspan="1" colspan="1">NL</td>
+              <td class="text-left" rowspan="1" colspan="1">Amsterdam</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">14061</td>
+              <td class="text-left" rowspan="1" colspan="1">Digital Ocean</td>
+              <td class="text-left" rowspan="1" colspan="1">CA</td>
+              <td class="text-left" rowspan="1" colspan="1">Toronto, ON</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">14061</td>
+              <td class="text-left" rowspan="1" colspan="1">Digital Ocean</td>
+              <td class="text-left" rowspan="1" colspan="1">USA</td>
+              <td class="text-left" rowspan="1" colspan="1">New York City, NY</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">14601</td>
+              <td class="text-left" rowspan="1" colspan="1">Digital Ocean</td>
+              <td class="text-left" rowspan="1" colspan="1">DE</td>
+              <td class="text-left" rowspan="1" colspan="1">Francfort</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">14601</td>
+              <td class="text-left" rowspan="1" colspan="1">Digital Ocean</td>
+              <td class="text-left" rowspan="1" colspan="1">IN</td>
+              <td class="text-left" rowspan="1" colspan="1">Bangalore</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">14601</td>
+              <td class="text-left" rowspan="1" colspan="1">Digital Ocean</td>
+              <td class="text-left" rowspan="1" colspan="1">SG</td>
+              <td class="text-left" rowspan="1" colspan="1">Singapore</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">16276</td>
+              <td class="text-left" rowspan="1" colspan="1">OVH</td>
+              <td class="text-left" rowspan="1" colspan="1">AU</td>
+              <td class="text-left" rowspan="1" colspan="1">Sydney</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">16276</td>
+              <td class="text-left" rowspan="1" colspan="1">OVH</td>
+              <td class="text-left" rowspan="1" colspan="1">PL</td>
+              <td class="text-left" rowspan="1" colspan="1">Warsaw</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">44684</td>
+              <td class="text-left" rowspan="1" colspan="1">Mythic Beasts</td>
+              <td class="text-left" rowspan="1" colspan="1">UK</td>
+              <td class="text-left" rowspan="1" colspan="1">Cambridge</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">60011</td>
+              <td class="text-left" rowspan="1" colspan="1">BHost Inc</td>
+              <td class="text-left" rowspan="1" colspan="1">US</td>
+              <td class="text-left" rowspan="1" colspan="1">Fremont, CA</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">198644</td>
+              <td class="text-left" rowspan="1" colspan="1">GO6</td>
+              <td class="text-left" rowspan="1" colspan="1">SI</td>
+              <td class="text-left" rowspan="1" colspan="1">Ljubljana</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<div id="tested-autonomous-systems">
+<section id="section-3.1.1">
+          <h4 id="name-tested-autonomous-systems">
+<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-tested-autonomous-systems" class="section-name selfRef">Tested Autonomous Systems</a>
+        </h4>
+</section>
+</div>
+</section>
+</div>
+<div id="results">
+<section id="section-3.2">
+        <h3 id="name-results">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-results" class="section-name selfRef">Results</a>
+        </h3>
+<div id="as-dropping-transit-traffic">
+<section id="section-3.2.1">
+          <h4 id="name-as-dropping-transit-traffic">
+<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-as-dropping-transit-traffic" class="section-name selfRef">AS dropping transit traffic</a>
+        </h4>
+</section>
+</div>
+<div id="most-dropped-extension-headers">
+<section id="section-3.2.2">
+          <h4 id="name-most-dropped-extension-head">
+<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-most-dropped-extension-head" class="section-name selfRef">Most dropped extension headers</a>
+        </h4>
+</section>
+</div>
+</section>
+</div>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-3">
+<section id="section-4">
       <h2 id="name-security-considerations">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-3-1">TODO Security<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">While active probing of the Internet may be considered as an attack, this measurement was done among collaborating parties and using the probe attribution technique described in I-D.draft-vyncke-opsec-probe-attribution.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-4">
+<section id="section-5">
       <h2 id="name-iana-considerations">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-4-1">This document has no IANA actions.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">This document has no IANA actions.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<section id="section-5">
-      <h2 id="name-normative-references">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<section id="section-6">
+      <h2 id="name-informative-references">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
       </h2>
 <dl class="references">
-<dt id="RFC2119">[RFC2119]</dt>
+<dt id="RFC7872">[RFC7872]</dt>
       <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<span class="refAuthor">Gont, F.</span>, <span class="refAuthor">Linkova, J.</span>, <span class="refAuthor">Chown, T.</span>, and <span class="refAuthor">W. Liu</span>, <span class="refTitle">"Observations on the Dropping of Packets with IPv6 Extension Headers in the Real World"</span>, <span class="seriesInfo">RFC 7872</span>, <span class="seriesInfo">DOI 10.17487/RFC7872</span>, <time datetime="2016-06" class="refDate">June 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7872">https://www.rfc-editor.org/rfc/rfc7872</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC8174">[RFC8174]</dt>
+<dt id="TIER1">[TIER1]</dt>
     <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<span class="refTitle">"Tier 1 network"</span>, <span>n.d.</span>, <span>&lt;<a href="https://en.wikipedia.org/wiki/Tier_1_network">https://en.wikipedia.org/wiki/Tier_1_network</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1193,15 +1345,16 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-A-1">The authors want to thank Sander Steffann and Jan Zorz for allowing the use of their labs.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">Special thanks as well to professor Benoit Donnet and research assistant Justin Iurman for their support and advices. This document would not have existed without their support.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
 <section id="appendix-B">
-      <h2 id="name-authors-address">
-<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
 <address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Ëric Vyncke</span></div>
+        <div dir="auto" class="left"><span class="fn nameRole">Éric Vyncke</span></div>
 <div dir="auto" class="left"><span class="org">Cisco</span></div>
 <div dir="auto" class="left"><span class="street-address">De Kleetlaan 64</span></div>
 <div dir="auto" class="left">
@@ -1211,6 +1364,16 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <div class="email">
 <span>Email:</span>
 <a href="mailto:evyncke@cisco.com" class="email">evyncke@cisco.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Raphaël Léas</span></div>
+<div dir="auto" class="left"><span class="org">Université de Liège</span></div>
+<div dir="auto" class="left"><span class="locality">Liège</span></div>
+<div dir="auto" class="left"><span class="country-name">Belgium</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:raphael.leas@student.uliege.be" class="email">raphael.leas@student.uliege.be</a>
 </div>
 </address>
 </section>
