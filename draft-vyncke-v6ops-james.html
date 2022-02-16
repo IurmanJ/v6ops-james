@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>Just Another Measurement of Extension header Survavibility</title>
+<title>Just Another Measurement of Extension header Survavibility (JAMES)</title>
 <meta content="Éric Vyncke" name="author">
 <meta content="Raphaël Léas" name="author">
 <meta content="
@@ -1049,7 +1049,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 </dd>
 </dl>
 </div>
-<h1 id="title">Just Another Measurement of Extension header Survavibility</h1>
+<h1 id="title">Just Another Measurement of Extension header Survavibility (JAMES)</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">In 2016, <span>[<a href="#RFC7872" class="xref">RFC7872</a>]</span> has measured the drop of packets with IPv6 extension headers. This document presents a slightly different methodology with more recent results.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
@@ -1132,6 +1132,9 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
                     <p id="section-toc.1-1.3.2.1.2.1.1" class="keepWithNext"><a href="#section-3.1.1" class="xref">3.1.1</a>.  <a href="#name-tested-autonomous-systems" class="xref">Tested Autonomous Systems</a></p>
 </li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.2">
+                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="xref">3.1.2</a>.  <a href="#name-tested-extension-headers" class="xref">Tested Extension Headers</a></p>
+</li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
@@ -1171,14 +1174,22 @@ svg [stroke="fill"], svg [fill^="#fff"] {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">In 2016, <span>[<a href="#RFC7872" class="xref">RFC7872</a>]</span> has measured the drop of packets with IPv6 extension headers. This document presents a slightly different methodology with more recent results.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">In 2016, <span>[<a href="#RFC7872" class="xref">RFC7872</a>]</span> has measured the drop of packets with IPv6 extension headers on their transit over the global Internet. This document presents a slightly different methodology with more recent results.<a href="#section-1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="methodology">
 <section id="section-2">
       <h2 id="name-methodology">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-methodology" class="section-name selfRef">Methodology</a>
-    </h2>
+      </h2>
+<p id="section-2-1">In a first step, the measurement is done between collaborating IPv6 nodes spread over the Internet and multiple Autonomous Systems (ASs). As seen in <a href="#analysed_as" class="xref">Section 3.1.1</a>, the source/destination/transit ASs include some "tier-1" providers per <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>, so, they are probably representative of the global Internet core.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">Relying on collaborating nodes has some benefits:<a href="#section-2-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-3.1">traffic timing can be measured accurately to answer the question whether extension headers are slower than plain IP6 packets;<a href="#section-2-3.1" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-3.2">traffic can be capture into pcap at the source and at the destination for later analysis.<a href="#section-2-3.2" class="pilcrow">¶</a>
+</li>
+      </ul>
 </section>
 </div>
 <div id="measurements">
@@ -1191,7 +1202,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
         <h3 id="name-vantage-points">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-vantage-points" class="section-name selfRef">Vantage Points</a>
         </h3>
-<p id="section-3.1-1">Several servers were used worldwide (albeit missing South America and Africa as authors were unable to have IPv6 servers in these regions). Table <a href="#table_vantage" class="xref">Table 1</a> lists all the vantage points together with their AS number and country.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">Several servers were used worldwide (albeit missing South America and Africa as authors were unable to have IPv6 servers in these regions). <a href="#table_vantage" class="xref">Table 1</a> lists all the vantage points together with their AS number and country.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <span id="name-all-vantage-as"></span><div id="table_vantage">
 <table class="center" id="table-1">
           <caption>
@@ -1276,10 +1287,90 @@ svg [stroke="fill"], svg [fill^="#fff"] {
           </tbody>
         </table>
 </div>
-<div id="tested-autonomous-systems">
+<div id="analysed_as">
 <section id="section-3.1.1">
           <h4 id="name-tested-autonomous-systems">
 <a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-tested-autonomous-systems" class="section-name selfRef">Tested Autonomous Systems</a>
+          </h4>
+<p id="section-3.1.1-1">During first step (traffic among fully meshed collaborative nodes), our probes have collected data on the following ASs:<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<span id="name-all-as-source-destination-t"></span><div id="table_analysed_as">
+<table class="center" id="table-2">
+            <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-all-as-source-destination-t" class="selfRef">All AS (source/destination/transit)</a>
+            </caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">AS Number</th>
+                <th class="text-left" rowspan="1" colspan="1">AS Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">4755</td>
+                <td class="text-left" rowspan="1" colspan="1">TATACOMM-AS TATA Communications formerly VSNL is Leading ISP, IN</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">6453</td>
+                <td class="text-left" rowspan="1" colspan="1">AS6453, US</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">2914</td>
+                <td class="text-left" rowspan="1" colspan="1">NTT-COMMUNICATIONS-2914, US</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">14061</td>
+                <td class="text-left" rowspan="1" colspan="1">DIGITALOCEAN-ASN, US</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">9498</td>
+                <td class="text-left" rowspan="1" colspan="1">BBIL-AP BHARTI Airtel Ltd., IN</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">6939</td>
+                <td class="text-left" rowspan="1" colspan="1">HURRICANE, US</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">5603</td>
+                <td class="text-left" rowspan="1" colspan="1">SIOL-NET Telekom Slovenije d.d., SI</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">198644</td>
+                <td class="text-left" rowspan="1" colspan="1">GO6, SI</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">12414</td>
+                <td class="text-left" rowspan="1" colspan="1">NL-SOLCON SOLCON, NL</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">4637</td>
+                <td class="text-left" rowspan="1" colspan="1">ASN-TELSTRA-GLOBAL Telstra Global, HK</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">1299</td>
+                <td class="text-left" rowspan="1" colspan="1">TWELVE99 Twelve99, Telia Carrier, SE</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">34779</td>
+                <td class="text-left" rowspan="1" colspan="1">T-2-AS AS set propagated by T-2 d.o.o., SI</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">3356</td>
+                <td class="text-left" rowspan="1" colspan="1">LEVEL3, US</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">3320</td>
+                <td class="text-left" rowspan="1" colspan="1">DTAG Internet service provider operations, DE</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+</section>
+</div>
+<div id="tested-extension-headers">
+<section id="section-3.1.2">
+          <h4 id="name-tested-extension-headers">
+<a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-tested-extension-headers" class="section-name selfRef">Tested Extension Headers</a>
         </h4>
 </section>
 </div>

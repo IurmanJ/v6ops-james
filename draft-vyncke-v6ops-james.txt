@@ -9,7 +9,7 @@ Expires: 20 August 2022                              Université de Liège
                                                         16 February 2022
 
 
-       Just Another Measurement of Extension header Survavibility
+   Just Another Measurement of Extension header Survavibility (JAMES)
                     draft-vyncke-v6ops-james-latest
 
 Abstract
@@ -72,6 +72,7 @@ Table of Contents
    3.  Measurements
      3.1.  Vantage Points
        3.1.1.  Tested Autonomous Systems
+       3.1.2.  Tested Extension Headers
      3.2.  Results
        3.2.1.  AS dropping transit traffic
        3.2.2.  Most dropped extension headers
@@ -84,10 +85,25 @@ Table of Contents
 1.  Introduction
 
    In 2016, [RFC7872] has measured the drop of packets with IPv6
-   extension headers.  This document presents a slightly different
-   methodology with more recent results.
+   extension headers on their transit over the global Internet.  This
+   document presents a slightly different methodology with more recent
+   results.
 
 2.  Methodology
+
+   In a first step, the measurement is done between collaborating IPv6
+   nodes spread over the Internet and multiple Autonomous Systems (ASs).
+   As seen in Section 3.1.1, the source/destination/transit ASs include
+   some "tier-1" providers per [TIER1], so, they are probably
+   representative of the global Internet core.
+
+   Relying on collaborating nodes has some benefits:
+
+   *  traffic timing can be measured accurately to answer the question
+      whether extension headers are slower than plain IP6 packets;
+
+   *  traffic can be capture into pcap at the source and at the
+      destination for later analysis.
 
 3.  Measurements
 
@@ -95,8 +111,8 @@ Table of Contents
 
    Several servers were used worldwide (albeit missing South America and
    Africa as authors were unable to have IPv6 servers in these regions).
-   Table Table 1 lists all the vantage points together with their AS
-   number and country.
+   Table 1 lists all the vantage points together with their AS number
+   and country.
 
      +========+==================+==============+===================+
      | ASN    | AS Name          | Country code | Location          |
@@ -127,6 +143,51 @@ Table of Contents
                          Table 1: All vantage AS
 
 3.1.1.  Tested Autonomous Systems
+
+   During first step (traffic among fully meshed collaborative nodes),
+   our probes have collected data on the following ASs:
+
+             +===========+==================================+
+             | AS Number | AS Description                   |
+             +===========+==================================+
+             | 4755      | TATACOMM-AS TATA Communications  |
+             |           | formerly VSNL is Leading ISP, IN |
+             +-----------+----------------------------------+
+             | 6453      | AS6453, US                       |
+             +-----------+----------------------------------+
+             | 2914      | NTT-COMMUNICATIONS-2914, US      |
+             +-----------+----------------------------------+
+             | 14061     | DIGITALOCEAN-ASN, US             |
+             +-----------+----------------------------------+
+             | 9498      | BBIL-AP BHARTI Airtel Ltd., IN   |
+             +-----------+----------------------------------+
+             | 6939      | HURRICANE, US                    |
+             +-----------+----------------------------------+
+             | 5603      | SIOL-NET Telekom Slovenije d.d., |
+             |           | SI                               |
+             +-----------+----------------------------------+
+             | 198644    | GO6, SI                          |
+             +-----------+----------------------------------+
+             | 12414     | NL-SOLCON SOLCON, NL             |
+             +-----------+----------------------------------+
+             | 4637      | ASN-TELSTRA-GLOBAL Telstra       |
+             |           | Global, HK                       |
+             +-----------+----------------------------------+
+             | 1299      | TWELVE99 Twelve99, Telia         |
+             |           | Carrier, SE                      |
+             +-----------+----------------------------------+
+             | 34779     | T-2-AS AS set propagated by T-2  |
+             |           | d.o.o., SI                       |
+             +-----------+----------------------------------+
+             | 3356      | LEVEL3, US                       |
+             +-----------+----------------------------------+
+             | 3320      | DTAG Internet service provider   |
+             |           | operations, DE                   |
+             +-----------+----------------------------------+
+
+               Table 2: All AS (source/destination/transit)
+
+3.1.2.  Tested Extension Headers
 
 3.2.  Results
 
