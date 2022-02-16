@@ -91,7 +91,7 @@ Table of Contents
 
 2.  Methodology
 
-   In a first step, the measurement is done between collaborating IPv6
+   In a first phase, the measurement is done between collaborating IPv6
    nodes spread over the Internet and multiple Autonomous Systems (ASs).
    As seen in Section 3.1.1, the source/destination/transit ASs include
    some "tier-1" providers per [TIER1], so, they are probably
@@ -99,11 +99,17 @@ Table of Contents
 
    Relying on collaborating nodes has some benefits:
 
-   *  traffic timing can be measured accurately to answer the question
-      whether extension headers are slower than plain IP6 packets;
+   *  traffic timing can be measured accurately to answer whether
+      extension headers are slower than plain IP6 packets;
 
-   *  traffic can be capture into pcap at the source and at the
+   *  traffic can be capture into .pcap file at the source and at the
       destination for later analysis.
+
+   Future phases will send probes to non-collaborating nodes with a much
+   reduce probing speed.  The destination will include [ALEXA] top-n web
+   sites, popular CDN, as well as random prefix from the IPv6 global
+   routing table.  A revision of this IETF draft will describe those
+   experiments.
 
 3.  Measurements
 
@@ -144,48 +150,43 @@ Table of Contents
 
 3.1.1.  Tested Autonomous Systems
 
-   During first step (traffic among fully meshed collaborative nodes),
+   During first phase (traffic among fully meshed collaborative nodes),
    our probes have collected data on the following ASs:
 
-             +===========+==================================+
-             | AS Number | AS Description                   |
-             +===========+==================================+
-             | 4755      | TATACOMM-AS TATA Communications  |
-             |           | formerly VSNL is Leading ISP, IN |
-             +-----------+----------------------------------+
-             | 6453      | AS6453, US                       |
-             +-----------+----------------------------------+
-             | 2914      | NTT-COMMUNICATIONS-2914, US      |
-             +-----------+----------------------------------+
-             | 14061     | DIGITALOCEAN-ASN, US             |
-             +-----------+----------------------------------+
-             | 9498      | BBIL-AP BHARTI Airtel Ltd., IN   |
-             +-----------+----------------------------------+
-             | 6939      | HURRICANE, US                    |
-             +-----------+----------------------------------+
-             | 5603      | SIOL-NET Telekom Slovenije d.d., |
-             |           | SI                               |
-             +-----------+----------------------------------+
-             | 198644    | GO6, SI                          |
-             +-----------+----------------------------------+
-             | 12414     | NL-SOLCON SOLCON, NL             |
-             +-----------+----------------------------------+
-             | 4637      | ASN-TELSTRA-GLOBAL Telstra       |
-             |           | Global, HK                       |
-             +-----------+----------------------------------+
-             | 1299      | TWELVE99 Twelve99, Telia         |
-             |           | Carrier, SE                      |
-             +-----------+----------------------------------+
-             | 34779     | T-2-AS AS set propagated by T-2  |
-             |           | d.o.o., SI                       |
-             +-----------+----------------------------------+
-             | 3356      | LEVEL3, US                       |
-             +-----------+----------------------------------+
-             | 3320      | DTAG Internet service provider   |
-             |           | operations, DE                   |
-             +-----------+----------------------------------+
+       +===========+===============================================+
+       | AS Number | AS Description                                |
+       +===========+===============================================+
+       | 1299      | TWELVE99 Twelve99, Telia Carrier, SE          |
+       +-----------+-----------------------------------------------+
+       | 2914      | NTT-COMMUNICATIONS-2914, US                   |
+       +-----------+-----------------------------------------------+
+       | 3320      | DTAG Internet service provider operations, DE |
+       +-----------+-----------------------------------------------+
+       | 3356      | LEVEL3, US                                    |
+       +-----------+-----------------------------------------------+
+       | 4637      | ASN-TELSTRA-GLOBAL Telstra Global, HK         |
+       +-----------+-----------------------------------------------+
+       | 4755      | TATACOMM-AS TATA Communications formerly VSNL |
+       |           | is Leading ISP, IN                            |
+       +-----------+-----------------------------------------------+
+       | 5603      | SIOL-NET Telekom Slovenije d.d., SI           |
+       +-----------+-----------------------------------------------+
+       | 6453      | AS6453, US                                    |
+       +-----------+-----------------------------------------------+
+       | 6939      | HURRICANE, US                                 |
+       +-----------+-----------------------------------------------+
+       | 9498      | BBIL-AP BHARTI Airtel Ltd., IN                |
+       +-----------+-----------------------------------------------+
+       | 12414     | NL-SOLCON SOLCON, NL                          |
+       +-----------+-----------------------------------------------+
+       | 14061     | DIGITALOCEAN-ASN, US                          |
+       +-----------+-----------------------------------------------+
+       | 34779     | T-2-AS AS set propagated by T-2 d.o.o., SI    |
+       +-----------+-----------------------------------------------+
+       | 198644    | GO6, SI                                       |
+       +-----------+-----------------------------------------------+
 
-               Table 2: All AS (source/destination/transit)
+                Table 2: All AS (source/destination/transit)
 
 3.1.2.  Tested Extension Headers
 
@@ -207,6 +208,9 @@ Table of Contents
    This document has no IANA actions.
 
 6.  Informative References
+
+   [ALEXA]    "The top 500 sites on the web", n.d.,
+              <https://www.alexa.com/topsites>.
 
    [RFC7872]  Gont, F., Linkova, J., Chown, T., and W. Liu,
               "Observations on the Dropping of Packets with IPv6

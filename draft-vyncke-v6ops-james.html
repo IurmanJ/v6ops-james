@@ -1182,14 +1182,15 @@ svg [stroke="fill"], svg [fill^="#fff"] {
       <h2 id="name-methodology">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-methodology" class="section-name selfRef">Methodology</a>
       </h2>
-<p id="section-2-1">In a first step, the measurement is done between collaborating IPv6 nodes spread over the Internet and multiple Autonomous Systems (ASs). As seen in <a href="#analysed_as" class="xref">Section 3.1.1</a>, the source/destination/transit ASs include some "tier-1" providers per <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>, so, they are probably representative of the global Internet core.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-1">In a first phase, the measurement is done between collaborating IPv6 nodes spread over the Internet and multiple Autonomous Systems (ASs). As seen in <a href="#analysed_as" class="xref">Section 3.1.1</a>, the source/destination/transit ASs include some "tier-1" providers per <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>, so, they are probably representative of the global Internet core.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">Relying on collaborating nodes has some benefits:<a href="#section-2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2-3.1">traffic timing can be measured accurately to answer the question whether extension headers are slower than plain IP6 packets;<a href="#section-2-3.1" class="pilcrow">¶</a>
+<li class="normal" id="section-2-3.1">traffic timing can be measured accurately to answer whether extension headers are slower than plain IP6 packets;<a href="#section-2-3.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-2-3.2">traffic can be capture into pcap at the source and at the destination for later analysis.<a href="#section-2-3.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-3.2">traffic can be capture into .pcap file at the source and at the destination for later analysis.<a href="#section-2-3.2" class="pilcrow">¶</a>
 </li>
       </ul>
+<p id="section-2-4">Future phases will send probes to non-collaborating nodes with a much reduce probing speed. The destination will include <span>[<a href="#ALEXA" class="xref">ALEXA</a>]</span> top-n web sites, popular CDN, as well as random prefix from the IPv6 global routing table. A revision of this IETF draft will describe those experiments.<a href="#section-2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="measurements">
@@ -1292,7 +1293,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
           <h4 id="name-tested-autonomous-systems">
 <a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-tested-autonomous-systems" class="section-name selfRef">Tested Autonomous Systems</a>
           </h4>
-<p id="section-3.1.1-1">During first step (traffic among fully meshed collaborative nodes), our probes have collected data on the following ASs:<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-1">During first phase (traffic among fully meshed collaborative nodes), our probes have collected data on the following ASs:<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
 <span id="name-all-as-source-destination-t"></span><div id="table_analysed_as">
 <table class="center" id="table-2">
             <caption>
@@ -1307,60 +1308,60 @@ svg [stroke="fill"], svg [fill^="#fff"] {
             </thead>
             <tbody>
               <tr>
-                <td class="text-left" rowspan="1" colspan="1">4755</td>
-                <td class="text-left" rowspan="1" colspan="1">TATACOMM-AS TATA Communications formerly VSNL is Leading ISP, IN</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">6453</td>
-                <td class="text-left" rowspan="1" colspan="1">AS6453, US</td>
+                <td class="text-left" rowspan="1" colspan="1">1299</td>
+                <td class="text-left" rowspan="1" colspan="1">TWELVE99 Twelve99, Telia Carrier, SE</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">2914</td>
                 <td class="text-left" rowspan="1" colspan="1">NTT-COMMUNICATIONS-2914, US</td>
               </tr>
               <tr>
-                <td class="text-left" rowspan="1" colspan="1">14061</td>
-                <td class="text-left" rowspan="1" colspan="1">DIGITALOCEAN-ASN, US</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">9498</td>
-                <td class="text-left" rowspan="1" colspan="1">BBIL-AP BHARTI Airtel Ltd., IN</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">6939</td>
-                <td class="text-left" rowspan="1" colspan="1">HURRICANE, US</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">5603</td>
-                <td class="text-left" rowspan="1" colspan="1">SIOL-NET Telekom Slovenije d.d., SI</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">198644</td>
-                <td class="text-left" rowspan="1" colspan="1">GO6, SI</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">12414</td>
-                <td class="text-left" rowspan="1" colspan="1">NL-SOLCON SOLCON, NL</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">4637</td>
-                <td class="text-left" rowspan="1" colspan="1">ASN-TELSTRA-GLOBAL Telstra Global, HK</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">1299</td>
-                <td class="text-left" rowspan="1" colspan="1">TWELVE99 Twelve99, Telia Carrier, SE</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">34779</td>
-                <td class="text-left" rowspan="1" colspan="1">T-2-AS AS set propagated by T-2 d.o.o., SI</td>
+                <td class="text-left" rowspan="1" colspan="1">3320</td>
+                <td class="text-left" rowspan="1" colspan="1">DTAG Internet service provider operations, DE</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">3356</td>
                 <td class="text-left" rowspan="1" colspan="1">LEVEL3, US</td>
               </tr>
               <tr>
-                <td class="text-left" rowspan="1" colspan="1">3320</td>
-                <td class="text-left" rowspan="1" colspan="1">DTAG Internet service provider operations, DE</td>
+                <td class="text-left" rowspan="1" colspan="1">4637</td>
+                <td class="text-left" rowspan="1" colspan="1">ASN-TELSTRA-GLOBAL Telstra Global, HK</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">4755</td>
+                <td class="text-left" rowspan="1" colspan="1">TATACOMM-AS TATA Communications formerly VSNL is Leading ISP, IN</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">5603</td>
+                <td class="text-left" rowspan="1" colspan="1">SIOL-NET Telekom Slovenije d.d., SI</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">6453</td>
+                <td class="text-left" rowspan="1" colspan="1">AS6453, US</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">6939</td>
+                <td class="text-left" rowspan="1" colspan="1">HURRICANE, US</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">9498</td>
+                <td class="text-left" rowspan="1" colspan="1">BBIL-AP BHARTI Airtel Ltd., IN</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">12414</td>
+                <td class="text-left" rowspan="1" colspan="1">NL-SOLCON SOLCON, NL</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">14061</td>
+                <td class="text-left" rowspan="1" colspan="1">DIGITALOCEAN-ASN, US</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">34779</td>
+                <td class="text-left" rowspan="1" colspan="1">T-2-AS AS set propagated by T-2 d.o.o., SI</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">198644</td>
+                <td class="text-left" rowspan="1" colspan="1">GO6, SI</td>
               </tr>
             </tbody>
           </table>
@@ -1420,6 +1421,10 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
       </h2>
 <dl class="references">
+<dt id="ALEXA">[ALEXA]</dt>
+      <dd>
+<span class="refTitle">"The top 500 sites on the web"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.alexa.com/topsites">https://www.alexa.com/topsites</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC7872">[RFC7872]</dt>
       <dd>
 <span class="refAuthor">Gont, F.</span>, <span class="refAuthor">Linkova, J.</span>, <span class="refAuthor">Chown, T.</span>, and <span class="refAuthor">W. Liu</span>, <span class="refTitle">"Observations on the Dropping of Packets with IPv6 Extension Headers in the Real World"</span>, <span class="seriesInfo">RFC 7872</span>, <span class="seriesInfo">DOI 10.17487/RFC7872</span>, <time datetime="2016-06" class="refDate">June 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7872">https://www.rfc-editor.org/rfc/rfc7872</a>&gt;</span>. </dd>
