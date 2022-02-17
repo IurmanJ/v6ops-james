@@ -5,8 +5,8 @@
 IPv6 Operations                                                E. Vyncke
 Internet-Draft                                                     Cisco
 Intended status: Informational                                   R. Léas
-Expires: 20 August 2022                              Université de Liège
-                                                        16 February 2022
+Expires: 21 August 2022                              Université de Liège
+                                                        17 February 2022
 
 
    Just Another Measurement of Extension header Survavibility (JAMES)
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 August 2022.
+   This Internet-Draft will expire on 21 August 2022.
 
 Copyright Notice
 
@@ -78,7 +78,9 @@ Table of Contents
        3.2.2.  Most dropped extension headers
    4.  Security Considerations
    5.  IANA Considerations
-   6.  Informative References
+   6.  References
+     6.1.  Normative References
+     6.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -190,6 +192,42 @@ Table of Contents
 
 3.1.2.  Tested Extension Headers
 
+   In the first phase, packets always contain either a UDP payload or a
+   TCP payload, the latter is sent with only the SYN flag set and with
+   data as permitted by section 3.4 of [RFC793] (2nd paragraph).  A
+   usual traceroute is done with only the UDP/TCP payload without any
+   extension header with varying hop-limit in order to learn the
+   traversed routers and ASs.  Then, several UDP/TCP probes are sent by
+   with a set of extension headers:
+
+   *  destination options header containing either an unknown option
+      with the "skip" bits or an unknown option with the "discard" bits
+      of varying extension header length: 8, 256, and 512 octets;
+
+   *  hop-by-hop options header containing either an unknown option with
+      the "skip" bits or an unknown option with the "discard" bits of
+      varying extension header length: 8, 256, and 512 octets;
+
+   *  routing header with routing types from 0 to 6 inclusive ;
+
+   *  atomic fragment header (i.e., more flag = 0 and offset = 0) or
+      varying frame length 512, 1280, and 1492 octets;
+
+   *  authentication header with dummy SPI followed by UDP/TCP header
+      and a 38 octets payload.
+
+   In the above, length is the length of the extension header itself
+   except for the fragmentation header where the length is the frame
+   length (i.e., including the Ethernet, IPv6, and TCP/UDP headers +
+   payload).
+
+   Next phases will also include packets without UDP/TCP but with Next-
+   Header being:
+
+   *  59, "no next header" see section 4.7 of [RFC8200]
+
+   *  143, "ethernet" see section 4.9 of [RFC8986]
+
 3.2.  Results
 
 3.2.1.  AS dropping transit traffic
@@ -207,7 +245,26 @@ Table of Contents
 
    This document has no IANA actions.
 
-6.  Informative References
+6.  References
+
+6.1.  Normative References
+
+   [RFC793]   Postel, J., "Transmission Control Protocol", STD 7,
+              RFC 793, DOI 10.17487/RFC0793, September 1981,
+              <https://www.rfc-editor.org/rfc/rfc793>.
+
+   [RFC8200]  Deering, S. and R. Hinden, "Internet Protocol, Version 6
+              (IPv6) Specification", STD 86, RFC 8200,
+              DOI 10.17487/RFC8200, July 2017,
+              <https://www.rfc-editor.org/rfc/rfc8200>.
+
+   [RFC8986]  Filsfils, C., Ed., Camarillo, P., Ed., Leddy, J., Voyer,
+              D., Matsushima, S., and Z. Li, "Segment Routing over IPv6
+              (SRv6) Network Programming", RFC 8986,
+              DOI 10.17487/RFC8986, February 2021,
+              <https://www.rfc-editor.org/rfc/rfc8986>.
+
+6.2.  Informative References
 
    [ALEXA]    "The top 500 sites on the web", n.d.,
               <https://www.alexa.com/topsites>.
@@ -237,7 +294,6 @@ Authors' Addresses
    De Kleetlaan 64
    1831 Diegem
    Belgium
-
    Email: evyncke@cisco.com
 
 
@@ -245,5 +301,4 @@ Authors' Addresses
    Université de Liège
    Liège
    Belgium
-
    Email: raphael.leas@student.uliege.be

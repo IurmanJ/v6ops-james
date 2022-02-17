@@ -10,11 +10,11 @@
 <meta content="
        In 2016,   has measured the drop of packets with IPv6 extension headers. This document presents a slightly different methodology with more recent results. 
     " name="description">
-<meta content="xml2rfc 3.12.1" name="generator">
+<meta content="xml2rfc 3.12.2" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-vyncke-v6ops-james-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.12.1
+  xml2rfc 3.12.2
     Python 3.9.7
     appdirs 1.4.4
     ConfigArgParse 1.3
@@ -1017,7 +1017,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Vyncke &amp; Léas</td>
-<td class="center">Expires 20 August 2022</td>
+<td class="center">Expires 21 August 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1030,12 +1030,12 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <dd class="internet-draft">draft-vyncke-v6ops-james-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-02-16" class="published">16 February 2022</time>
+<time datetime="2022-02-17" class="published">17 February 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-08-20">20 August 2022</time></dd>
+<dd class="expires"><time datetime="2022-08-21">21 August 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1088,7 +1088,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 August 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 August 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1157,7 +1157,15 @@ svg [stroke="fill"], svg [fill^="#fff"] {
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-informative-references" class="xref">Informative References</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-references" class="xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="xref">6.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="xref">6.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="xref"></a><a href="#name-acknowledgments" class="xref">Acknowledgments</a></p>
@@ -1372,7 +1380,28 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <section id="section-3.1.2">
           <h4 id="name-tested-extension-headers">
 <a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-tested-extension-headers" class="section-name selfRef">Tested Extension Headers</a>
-        </h4>
+          </h4>
+<p id="section-3.1.2-1">In the first phase, packets always contain either a UDP payload or a TCP payload, the latter is sent with only the SYN flag set and with data as permitted by section 3.4 of <span>[<a href="#RFC793" class="xref">RFC793</a>]</span> (2nd paragraph). A usual traceroute is done with only the UDP/TCP payload without any extension header with varying hop-limit in order to learn the traversed routers and ASs. Then, several UDP/TCP probes are sent by with a set of extension headers:<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.1.2-2.1">destination options header containing either an unknown option with the "skip" bits or an unknown option with the "discard" bits of varying extension header length: 8, 256, and 512 octets;<a href="#section-3.1.2-2.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.1.2-2.2">hop-by-hop options header containing either an unknown option with the "skip" bits or an unknown option with the "discard" bits of varying extension header length: 8, 256, and 512 octets;<a href="#section-3.1.2-2.2" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.1.2-2.3">routing header with routing types from 0 to 6 inclusive ;<a href="#section-3.1.2-2.3" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.1.2-2.4">atomic fragment header (i.e., more flag = 0 and offset = 0) or varying frame length 512, 1280, and 1492 octets;<a href="#section-3.1.2-2.4" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.1.2-2.5">authentication header with dummy SPI followed by UDP/TCP header and a 38 octets payload.<a href="#section-3.1.2-2.5" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-3.1.2-3">In the above, length is the length of the extension header itself except for the fragmentation header where the length is the frame length (i.e., including the Ethernet, IPv6, and TCP/UDP headers + payload).<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-4">Next phases will also include packets without UDP/TCP but with Next-Header being:<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.1.2-5.1">59, "no next header" see section 4.7 of <span>[<a href="#RFC8200" class="xref">RFC8200</a>]</span><a href="#section-3.1.2-5.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.1.2-5.2">143, "ethernet" see section 4.9 of <span>[<a href="#RFC8986" class="xref">RFC8986</a>]</span><a href="#section-3.1.2-5.2" class="pilcrow">¶</a>
+</li>
+          </ul>
 </section>
 </div>
 </section>
@@ -1417,23 +1446,47 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 </section>
 </div>
 <section id="section-6">
-      <h2 id="name-informative-references">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+      <h2 id="name-references">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
+<section id="section-6.1">
+        <h3 id="name-normative-references">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="RFC793">[RFC793]</dt>
+        <dd>
+<span class="refAuthor">Postel, J.</span>, <span class="refTitle">"Transmission Control Protocol"</span>, <span class="seriesInfo">STD 7</span>, <span class="seriesInfo">RFC 793</span>, <span class="seriesInfo">DOI 10.17487/RFC0793</span>, <time datetime="1981-09" class="refDate">September 1981</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc793">https://www.rfc-editor.org/rfc/rfc793</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8200">[RFC8200]</dt>
+        <dd>
+<span class="refAuthor">Deering, S.</span> and <span class="refAuthor">R. Hinden</span>, <span class="refTitle">"Internet Protocol, Version 6 (IPv6) Specification"</span>, <span class="seriesInfo">STD 86</span>, <span class="seriesInfo">RFC 8200</span>, <span class="seriesInfo">DOI 10.17487/RFC8200</span>, <time datetime="2017-07" class="refDate">July 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8200">https://www.rfc-editor.org/rfc/rfc8200</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8986">[RFC8986]</dt>
+      <dd>
+<span class="refAuthor">Filsfils, C., Ed.</span>, <span class="refAuthor">Camarillo, P., Ed.</span>, <span class="refAuthor">Leddy, J.</span>, <span class="refAuthor">Voyer, D.</span>, <span class="refAuthor">Matsushima, S.</span>, and <span class="refAuthor">Z. Li</span>, <span class="refTitle">"Segment Routing over IPv6 (SRv6) Network Programming"</span>, <span class="seriesInfo">RFC 8986</span>, <span class="seriesInfo">DOI 10.17487/RFC8986</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8986">https://www.rfc-editor.org/rfc/rfc8986</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+<section id="section-6.2">
+        <h3 id="name-informative-references">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
 <dl class="references">
 <dt id="ALEXA">[ALEXA]</dt>
-      <dd>
+        <dd>
 <span class="refTitle">"The top 500 sites on the web"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.alexa.com/topsites">https://www.alexa.com/topsites</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7872">[RFC7872]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Gont, F.</span>, <span class="refAuthor">Linkova, J.</span>, <span class="refAuthor">Chown, T.</span>, and <span class="refAuthor">W. Liu</span>, <span class="refTitle">"Observations on the Dropping of Packets with IPv6 Extension Headers in the Real World"</span>, <span class="seriesInfo">RFC 7872</span>, <span class="seriesInfo">DOI 10.17487/RFC7872</span>, <time datetime="2016-06" class="refDate">June 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7872">https://www.rfc-editor.org/rfc/rfc7872</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="TIER1">[TIER1]</dt>
-    <dd>
+      <dd>
 <span class="refTitle">"Tier 1 network"</span>, <span>n.d.</span>, <span>&lt;<a href="https://en.wikipedia.org/wiki/Tier_1_network">https://en.wikipedia.org/wiki/Tier_1_network</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
+</section>
 </section>
 <div id="acknowledgments">
 <section id="appendix-A">
