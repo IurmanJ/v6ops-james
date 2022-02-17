@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>Just Another Measurement of Extension header Survavibility (JAMES)</title>
+<title>Just Another Measurement of Extension header Survivability (JAMES)</title>
 <meta content="Éric Vyncke" name="author">
 <meta content="Raphaël Léas" name="author">
 <meta content="
@@ -1049,7 +1049,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 </dd>
 </dl>
 </div>
-<h1 id="title">Just Another Measurement of Extension header Survavibility (JAMES)</h1>
+<h1 id="title">Just Another Measurement of Extension header Survivability (JAMES)</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">In 2016, <span>[<a href="#RFC7872" class="xref">RFC7872</a>]</span> has measured the drop of packets with IPv6 extension headers. This document presents a slightly different methodology with more recent results. It is still work in progress.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
@@ -1139,14 +1139,6 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-results" class="xref">Results</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
-                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="xref">3.2.1</a>.  <a href="#name-about-extension-headers" class="xref">About extension headers</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
-                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="xref">3.2.2</a>.  <a href="#name-as-dropping-transit-traffic" class="xref">AS dropping transit traffic</a></p>
-</li>
-                </ul>
 </li>
             </ul>
 </li>
@@ -1182,7 +1174,8 @@ svg [stroke="fill"], svg [fill^="#fff"] {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">In 2016, <span>[<a href="#RFC7872" class="xref">RFC7872</a>]</span> has measured the drop of packets with IPv6 extension headers on their transit over the global Internet. This document presents a slightly different methodology with more recent results. It is still work in progress but the authors wanted to present some results at IETF-113 (March 2022).<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">In 2016, <span>[<a href="#RFC7872" class="xref">RFC7872</a>]</span> has measured the drop of packets with IPv6 extension headers on their transit over the global Internet. This document presents a slightly different methodology with more recent results. Since then, <span>[<a href="#I-D.draft-ietf-opsec-ipv6-eh-filtering" class="xref">I-D.draft-ietf-opsec-ipv6-eh-filtering</a>]</span> provides some recommendations for filtering transit traffic.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">It is still work in progress, but the authors wanted to present some results at IETF-113 (March 2022).<a href="#section-1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="methodology">
@@ -1412,42 +1405,131 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-results" class="section-name selfRef">Results</a>
         </h3>
 <p id="section-3.2-1">This section presents the current results out of phase 1 testing.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<div id="about-extension-headers">
-<section id="section-3.2.1">
-          <h4 id="name-about-extension-headers">
-<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-about-extension-headers" class="section-name selfRef">About extension headers</a>
-          </h4>
-<p id="section-3.2.1-1">Packets with some extension headers were never dropped over the Internet: packets with authentication, fragmentation, and routing (type different from 0) headers can freely traverse the global Internet.<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.2.1-2">The table below lists the few AS that drops packets with the routing header type 0.<a href="#section-3.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">Packets with some extension headers were never dropped over the Internet: packets with authentication, fragmentation, and routing (type different from 0) headers can freely traverse the global Internet.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">The table below lists the few AS that drops packets with the routing header type 0.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <table class="center" id="table-3">
-            <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
+          <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
 <thead>
-              <tr>
-                <th class="text-left" rowspan="1" colspan="1">AS Number</th>
-                <th class="text-left" rowspan="1" colspan="1">AS description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">6939</td>
-                <td class="text-left" rowspan="1" colspan="1">HURRICANE, US</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">4637</td>
-                <td class="text-left" rowspan="1" colspan="1">ASN-TELSTRA-GLOBAL Telstra Global, HK</td>
-              </tr>
-            </tbody>
-          </table>
-<p id="section-3.2.1-4">It is possibly due to a strict implementation of <span>[<a href="#RFC5095" class="xref">RFC5095</a>]</span> but it is expected that no packet with routing header type 0 would be transmitted anymore. Other routing header types (mobile IPv6 <span>[<a href="#RFC6275" class="xref">RFC6275</a>]</span>, RPL <span>[<a href="#RFC6554" class="xref">RFC6554</a>]</span>, SRH <span>[<a href="#RFC8754" class="xref">RFC8754</a>]</span>, and even CRH-16 and CRH-32<span>[<a href="#I-D.draft-bonica-6man-comp-rtg-hdr" class="xref">I-D.draft-bonica-6man-comp-rtg-hdr</a>]</span>) can be transmitted over the global Internet.<a href="#section-3.2.1-4" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="dropping_as">
-<section id="section-3.2.2">
-          <h4 id="name-as-dropping-transit-traffic">
-<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-as-dropping-transit-traffic" class="section-name selfRef">AS dropping transit traffic</a>
-        </h4>
-</section>
-</div>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">AS Number</th>
+              <th class="text-left" rowspan="1" colspan="1">AS description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">6939</td>
+              <td class="text-left" rowspan="1" colspan="1">HURRICANE, US</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">4637</td>
+              <td class="text-left" rowspan="1" colspan="1">ASN-TELSTRA-GLOBAL Telstra Global, HK</td>
+            </tr>
+          </tbody>
+        </table>
+<p id="section-3.2-5">It is possibly due to a strict implementation of <span>[<a href="#RFC5095" class="xref">RFC5095</a>]</span> but it is expected that no packet with routing header type 0 would be transmitted anymore. Other routing header types (mobile IPv6 <span>[<a href="#RFC6275" class="xref">RFC6275</a>]</span>, RPL <span>[<a href="#RFC6554" class="xref">RFC6554</a>]</span>, SRH <span>[<a href="#RFC8754" class="xref">RFC8754</a>]</span>, and even CRH-16 and CRH-32<span>[<a href="#I-D.draft-bonica-6man-comp-rtg-hdr" class="xref">I-D.draft-bonica-6man-comp-rtg-hdr</a>]</span>) can be transmitted over the global Internet without being dropped.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+<p id="section-3.2-6">Some ASs drop packets with hop-by-hop or destination options extension headers, see the following table:<a href="#section-3.2-6" class="pilcrow">¶</a></p>
+<table class="center" id="table-4">
+          <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">AS Number</th>
+              <th class="text-left" rowspan="1" colspan="1">AS Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">5603</td>
+              <td class="text-left" rowspan="1" colspan="1">SIOL-NET Telekom Slovenije d.d., SI</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">12414</td>
+              <td class="text-left" rowspan="1" colspan="1">NL-SOLCON SOLCON, NL</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">34779</td>
+              <td class="text-left" rowspan="1" colspan="1">T-2-AS AS set propagated by T-2 d.o.o., SI</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">198644</td>
+              <td class="text-left" rowspan="1" colspan="1">GO6, SI</td>
+            </tr>
+          </tbody>
+        </table>
+<p id="section-3.2-8">The above list seems to include only access providers and no major tier providers.<a href="#section-3.2-8" class="pilcrow">¶</a></p>
+<p id="section-3.2-9">Finally, some ASs do not drop transit traffic (except for routing header type 0) and follow the recommendations of <span>[<a href="#I-D.draft-ietf-opsec-ipv6-eh-filtering" class="xref">I-D.draft-ietf-opsec-ipv6-eh-filtering</a>]</span>. This list includes tier-1 transit providers (using the "regional" tag per <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>):<a href="#section-3.2-9" class="pilcrow">¶</a></p>
+<table class="center" id="table-5">
+          <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">AS Number</th>
+              <th class="text-left" rowspan="1" colspan="1">Tier-1</th>
+              <th class="text-left" rowspan="1" colspan="1">AS Description</th>
+              <th class="text-left" rowspan="1" colspan="1">Drop RH0</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1299</td>
+              <td class="text-left" rowspan="1" colspan="1">yes</td>
+              <td class="text-left" rowspan="1" colspan="1">TWELVE99 Twelve99, Telia Carrier, SE</td>
+              <td class="text-left" rowspan="1" colspan="1"> </td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">2914</td>
+              <td class="text-left" rowspan="1" colspan="1">yes</td>
+              <td class="text-left" rowspan="1" colspan="1">NTT-COMMUNICATIONS-2914, US</td>
+              <td class="text-left" rowspan="1" colspan="1"> </td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">3320</td>
+              <td class="text-left" rowspan="1" colspan="1">yes</td>
+              <td class="text-left" rowspan="1" colspan="1">DTAG Internet service provider operations, DE</td>
+              <td class="text-left" rowspan="1" colspan="1"> </td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">3356</td>
+              <td class="text-left" rowspan="1" colspan="1">yes</td>
+              <td class="text-left" rowspan="1" colspan="1">LEVEL3, US</td>
+              <td class="text-left" rowspan="1" colspan="1"> </td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">4637</td>
+              <td class="text-left" rowspan="1" colspan="1">regional</td>
+              <td class="text-left" rowspan="1" colspan="1">ASN-TELSTRA-GLOBAL Telstra Global, HK</td>
+              <td class="text-left" rowspan="1" colspan="1">drop</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">4755</td>
+              <td class="text-left" rowspan="1" colspan="1"> </td>
+              <td class="text-left" rowspan="1" colspan="1">TATACOMM-AS TATA Communications formerly VSNL is Leading ISP, IN</td>
+              <td class="text-left" rowspan="1" colspan="1"> </td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">6453</td>
+              <td class="text-left" rowspan="1" colspan="1">yes</td>
+              <td class="text-left" rowspan="1" colspan="1">AS6453, US</td>
+              <td class="text-left" rowspan="1" colspan="1"> </td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">6939</td>
+              <td class="text-left" rowspan="1" colspan="1">regional</td>
+              <td class="text-left" rowspan="1" colspan="1">HURRICANE, US</td>
+              <td class="text-left" rowspan="1" colspan="1">drop</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">9498</td>
+              <td class="text-left" rowspan="1" colspan="1"> </td>
+              <td class="text-left" rowspan="1" colspan="1">BBIL-AP BHARTI Airtel Ltd., IN</td>
+              <td class="text-left" rowspan="1" colspan="1"> </td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">14061</td>
+              <td class="text-left" rowspan="1" colspan="1"> </td>
+              <td class="text-left" rowspan="1" colspan="1">DIGITALOCEAN-ASN, US</td>
+              <td class="text-left" rowspan="1" colspan="1"> </td>
+            </tr>
+          </tbody>
+        </table>
 </section>
 </div>
 </section>
@@ -1503,6 +1585,10 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <dt id="I-D.draft-bonica-6man-comp-rtg-hdr">[I-D.draft-bonica-6man-comp-rtg-hdr]</dt>
         <dd>
 <span class="refAuthor">Bonica, R.</span>, <span class="refAuthor">Kamite, Y.</span>, <span class="refAuthor">Alston, A.</span>, <span class="refAuthor">Henriques, D.</span>, and <span class="refAuthor">L. Jalil</span>, <span class="refTitle">"The IPv6 Compact Routing Header (CRH)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bonica-6man-comp-rtg-hdr-27</span>, <time datetime="2021-11-15" class="refDate">15 November 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bonica-6man-comp-rtg-hdr-27">https://datatracker.ietf.org/doc/html/draft-bonica-6man-comp-rtg-hdr-27</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.draft-ietf-opsec-ipv6-eh-filtering">[I-D.draft-ietf-opsec-ipv6-eh-filtering]</dt>
+        <dd>
+<span class="refAuthor">Gont, F.</span> and <span class="refAuthor">W. (. Liu</span>, <span class="refTitle">"Recommendations on the Filtering of IPv6 Packets Containing IPv6 Extension Headers at Transit Routers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsec-ipv6-eh-filtering-08</span>, <time datetime="2021-06-03" class="refDate">3 June 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsec-ipv6-eh-filtering-08">https://datatracker.ietf.org/doc/html/draft-ietf-opsec-ipv6-eh-filtering-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5095">[RFC5095]</dt>
         <dd>

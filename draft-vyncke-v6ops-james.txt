@@ -9,7 +9,7 @@ Expires: 21 August 2022                              Université de Liège
                                                         17 February 2022
 
 
-   Just Another Measurement of Extension header Survavibility (JAMES)
+   Just Another Measurement of Extension header Survivability (JAMES)
                     draft-vyncke-v6ops-james-latest
 
 Abstract
@@ -74,8 +74,6 @@ Table of Contents
        3.1.1.  Tested Autonomous Systems
        3.1.2.  Tested Extension Headers
      3.2.  Results
-       3.2.1.  About extension headers
-       3.2.2.  AS dropping transit traffic
    4.  Security Considerations
    5.  IANA Considerations
    6.  References
@@ -89,8 +87,11 @@ Table of Contents
    In 2016, [RFC7872] has measured the drop of packets with IPv6
    extension headers on their transit over the global Internet.  This
    document presents a slightly different methodology with more recent
-   results.  It is still work in progress but the authors wanted to
-   present some results at IETF-113 (March 2022).
+   results.  Since then, [I-D.draft-ietf-opsec-ipv6-eh-filtering]
+   provides some recommendations for filtering transit traffic.
+
+   It is still work in progress, but the authors wanted to present some
+   results at IETF-113 (March 2022).
 
 2.  Methodology
 
@@ -233,8 +234,6 @@ Table of Contents
 
    This section presents the current results out of phase 1 testing.
 
-3.2.1.  About extension headers
-
    Packets with some extension headers were never dropped over the
    Internet: packets with authentication, fragmentation, and routing
    (type different from 0) headers can freely traverse the global
@@ -258,9 +257,63 @@ Table of Contents
    transmitted anymore.  Other routing header types (mobile IPv6
    [RFC6275], RPL [RFC6554], SRH [RFC8754], and even CRH-16 and CRH-
    32[I-D.draft-bonica-6man-comp-rtg-hdr]) can be transmitted over the
-   global Internet.
+   global Internet without being dropped.
 
-3.2.2.  AS dropping transit traffic
+   Some ASs drop packets with hop-by-hop or destination options
+   extension headers, see the following table:
+
+        +===========+============================================+
+        | AS Number | AS Description                             |
+        +===========+============================================+
+        | 5603      | SIOL-NET Telekom Slovenije d.d., SI        |
+        +-----------+--------------------------------------------+
+        | 12414     | NL-SOLCON SOLCON, NL                       |
+        +-----------+--------------------------------------------+
+        | 34779     | T-2-AS AS set propagated by T-2 d.o.o., SI |
+        +-----------+--------------------------------------------+
+        | 198644    | GO6, SI                                    |
+        +-----------+--------------------------------------------+
+
+                                 Table 4
+
+   The above list seems to include only access providers and no major
+   tier providers.
+
+   Finally, some ASs do not drop transit traffic (except for routing
+   header type 0) and follow the recommendations of
+   [I-D.draft-ietf-opsec-ipv6-eh-filtering].  This list includes tier-1
+   transit providers (using the "regional" tag per [TIER1]):
+
+    +===========+==========+==================================+======+
+    | AS Number | Tier-1   | AS Description                   | Drop |
+    |           |          |                                  | RH0  |
+    +===========+==========+==================================+======+
+    | 1299      | yes      | TWELVE99 Twelve99, Telia         |      |
+    |           |          | Carrier, SE                      |      |
+    +-----------+----------+----------------------------------+------+
+    | 2914      | yes      | NTT-COMMUNICATIONS-2914, US      |      |
+    +-----------+----------+----------------------------------+------+
+    | 3320      | yes      | DTAG Internet service provider   |      |
+    |           |          | operations, DE                   |      |
+    +-----------+----------+----------------------------------+------+
+    | 3356      | yes      | LEVEL3, US                       |      |
+    +-----------+----------+----------------------------------+------+
+    | 4637      | regional | ASN-TELSTRA-GLOBAL Telstra       | drop |
+    |           |          | Global, HK                       |      |
+    +-----------+----------+----------------------------------+------+
+    | 4755      |          | TATACOMM-AS TATA Communications  |      |
+    |           |          | formerly VSNL is Leading ISP, IN |      |
+    +-----------+----------+----------------------------------+------+
+    | 6453      | yes      | AS6453, US                       |      |
+    +-----------+----------+----------------------------------+------+
+    | 6939      | regional | HURRICANE, US                    | drop |
+    +-----------+----------+----------------------------------+------+
+    | 9498      |          | BBIL-AP BHARTI Airtel Ltd., IN   |      |
+    +-----------+----------+----------------------------------+------+
+    | 14061     |          | DIGITALOCEAN-ASN, US             |      |
+    +-----------+----------+----------------------------------+------+
+
+                                 Table 5
 
 4.  Security Considerations
 
@@ -304,6 +357,14 @@ Table of Contents
               27, 15 November 2021,
               <https://datatracker.ietf.org/doc/html/draft-bonica-6man-
               comp-rtg-hdr-27>.
+
+   [I-D.draft-ietf-opsec-ipv6-eh-filtering]
+              Gont, F. and W. (. Liu, "Recommendations on the Filtering
+              of IPv6 Packets Containing IPv6 Extension Headers at
+              Transit Routers", Work in Progress, Internet-Draft, draft-
+              ietf-opsec-ipv6-eh-filtering-08, 3 June 2021,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-opsec-
+              ipv6-eh-filtering-08>.
 
    [RFC5095]  Abley, J., Savola, P., and G. Neville-Neil, "Deprecation
               of Type 0 Routing Headers in IPv6", RFC 5095,
