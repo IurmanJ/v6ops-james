@@ -16,7 +16,7 @@ Abstract
 
    In 2016, [RFC7872] has measured the drop of packets with IPv6
    extension headers.  This document presents a slightly different
-   methodology with more recent results.
+   methodology with more recent results.  It is still work in progress.
 
 About This Document
 
@@ -74,8 +74,8 @@ Table of Contents
        3.1.1.  Tested Autonomous Systems
        3.1.2.  Tested Extension Headers
      3.2.  Results
-       3.2.1.  AS dropping transit traffic
-       3.2.2.  Most dropped extension headers
+       3.2.1.  About extension headers
+       3.2.2.  AS dropping transit traffic
    4.  Security Considerations
    5.  IANA Considerations
    6.  References
@@ -89,7 +89,8 @@ Table of Contents
    In 2016, [RFC7872] has measured the drop of packets with IPv6
    extension headers on their transit over the global Internet.  This
    document presents a slightly different methodology with more recent
-   results.
+   results.  It is still work in progress but the authors wanted to
+   present some results at IETF-113 (March 2022).
 
 2.  Methodology
 
@@ -108,8 +109,8 @@ Table of Contents
       destination for later analysis.
 
    Future phases will send probes to non-collaborating nodes with a much
-   reduce probing speed.  The destination will include [ALEXA] top-n web
-   sites, popular CDN, as well as random prefix from the IPv6 global
+   reduce probing speed.  The destination will include [ALEXA] top-n
+   websites, popular CDN, as well as random prefix from the IPv6 global
    routing table.  A revision of this IETF draft will describe those
    experiments.
 
@@ -224,15 +225,42 @@ Table of Contents
    Next phases will also include packets without UDP/TCP but with Next-
    Header being:
 
-   *  59, "no next header" see section 4.7 of [RFC8200]
+   *  59, "no next header" see section 4.7 of [RFC8200];
 
-   *  143, "ethernet" see section 4.9 of [RFC8986]
+   *  143, "ethernet" see section 4.9 of [RFC8986].
 
 3.2.  Results
 
-3.2.1.  AS dropping transit traffic
+   This section presents the current results out of phase 1 testing.
 
-3.2.2.  Most dropped extension headers
+3.2.1.  About extension headers
+
+   Packets with some extension headers were never dropped over the
+   Internet: packets with authentication, fragmentation, and routing
+   (type different from 0) headers can freely traverse the global
+   Internet.
+
+   The table below lists the few AS that drops packets with the routing
+   header type 0.
+
+           +===========+=======================================+
+           | AS Number | AS description                        |
+           +===========+=======================================+
+           | 6939      | HURRICANE, US                         |
+           +-----------+---------------------------------------+
+           | 4637      | ASN-TELSTRA-GLOBAL Telstra Global, HK |
+           +-----------+---------------------------------------+
+
+                                  Table 3
+
+   It is possibly due to a strict implementation of [RFC5095] but it is
+   expected that no packet with routing header type 0 would be
+   transmitted anymore.  Other routing header types (mobile IPv6
+   [RFC6275], RPL [RFC6554], SRH [RFC8754], and even CRH-16 and CRH-
+   32[I-D.draft-bonica-6man-comp-rtg-hdr]) can be transmitted over the
+   global Internet.
+
+3.2.2.  AS dropping transit traffic
 
 4.  Security Considerations
 
@@ -269,11 +297,39 @@ Table of Contents
    [ALEXA]    "The top 500 sites on the web", n.d.,
               <https://www.alexa.com/topsites>.
 
+   [I-D.draft-bonica-6man-comp-rtg-hdr]
+              Bonica, R., Kamite, Y., Alston, A., Henriques, D., and L.
+              Jalil, "The IPv6 Compact Routing Header (CRH)", Work in
+              Progress, Internet-Draft, draft-bonica-6man-comp-rtg-hdr-
+              27, 15 November 2021,
+              <https://datatracker.ietf.org/doc/html/draft-bonica-6man-
+              comp-rtg-hdr-27>.
+
+   [RFC5095]  Abley, J., Savola, P., and G. Neville-Neil, "Deprecation
+              of Type 0 Routing Headers in IPv6", RFC 5095,
+              DOI 10.17487/RFC5095, December 2007,
+              <https://www.rfc-editor.org/rfc/rfc5095>.
+
+   [RFC6275]  Perkins, C., Ed., Johnson, D., and J. Arkko, "Mobility
+              Support in IPv6", RFC 6275, DOI 10.17487/RFC6275, July
+              2011, <https://www.rfc-editor.org/rfc/rfc6275>.
+
+   [RFC6554]  Hui, J., Vasseur, JP., Culler, D., and V. Manral, "An IPv6
+              Routing Header for Source Routes with the Routing Protocol
+              for Low-Power and Lossy Networks (RPL)", RFC 6554,
+              DOI 10.17487/RFC6554, March 2012,
+              <https://www.rfc-editor.org/rfc/rfc6554>.
+
    [RFC7872]  Gont, F., Linkova, J., Chown, T., and W. Liu,
               "Observations on the Dropping of Packets with IPv6
               Extension Headers in the Real World", RFC 7872,
               DOI 10.17487/RFC7872, June 2016,
               <https://www.rfc-editor.org/rfc/rfc7872>.
+
+   [RFC8754]  Filsfils, C., Ed., Dukes, D., Ed., Previdi, S., Leddy, J.,
+              Matsushima, S., and D. Voyer, "IPv6 Segment Routing Header
+              (SRH)", RFC 8754, DOI 10.17487/RFC8754, March 2020,
+              <https://www.rfc-editor.org/rfc/rfc8754>.
 
    [TIER1]    "Tier 1 network", n.d.,
               <https://en.wikipedia.org/wiki/Tier_1_network>.
