@@ -5,8 +5,9 @@
 IPv6 Operations                                                E. Vyncke
 Internet-Draft                                                     Cisco
 Intended status: Informational                                   R. Léas
-Expires: 21 August 2022                              Université de Liège
-                                                        17 February 2022
+Expires: 22 August 2022                                        J. Iurman
+                                                     Université de Liège
+                                                        18 February 2022
 
 
    Just Another Measurement of Extension header Survivability (JAMES)
@@ -49,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 August 2022.
+   This Internet-Draft will expire on 22 August 2022.
 
 Copyright Notice
 
@@ -419,3 +420,9 @@ Authors' Addresses
    Liège
    Belgium
    Email: raphael.leas@student.uliege.be
+
+
+   Justin Iurman
+   Université de Liège
+   Belgium
+   Email: justin.iurman@uliege.be
