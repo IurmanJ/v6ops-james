@@ -5,9 +5,9 @@
 IPv6 Operations                                                E. Vyncke
 Internet-Draft                                                     Cisco
 Intended status: Informational                                   R. Léas
-Expires: 22 August 2022                                        J. Iurman
+Expires: 26 August 2022                                        J. Iurman
                                                      Université de Liège
-                                                        18 February 2022
+                                                        22 February 2022
 
 
    Just Another Measurement of Extension header Survivability (JAMES)
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 August 2022.
+   This Internet-Draft will expire on 26 August 2022.
 
 Copyright Notice
 
@@ -88,8 +88,9 @@ Table of Contents
    In 2016, [RFC7872] has measured the drop of packets with IPv6
    extension headers on their transit over the global Internet.  This
    document presents a slightly different methodology with more recent
-   results.  Since then, [I-D.draft-ietf-opsec-ipv6-eh-filtering]
-   provides some recommendations for filtering transit traffic.
+   results.  Since then, [I-D.draft-ietf-opsec-ipv6-eh-filtering] has
+   provided some recommendations for filtering transit traffic, there
+   may be some changes in providers policies.
 
    It is still work in progress, but the authors wanted to present some
    results at IETF-113 (March 2022).
@@ -125,73 +126,94 @@ Table of Contents
    Table 1 lists all the vantage points together with their AS number
    and country.
 
-     +========+==================+==============+===================+
-     | ASN    | AS Name          | Country code | Location          |
-     +========+==================+==============+===================+
-     | 12414  | NL-SOLCON SOLCON | NL           | Amsterdam         |
-     +--------+------------------+--------------+-------------------+
-     | 14061  | Digital Ocean    | CA           | Toronto, ON       |
-     +--------+------------------+--------------+-------------------+
-     | 14061  | Digital Ocean    | USA          | New York City, NY |
-     +--------+------------------+--------------+-------------------+
-     | 14601  | Digital Ocean    | DE           | Francfort         |
-     +--------+------------------+--------------+-------------------+
-     | 14601  | Digital Ocean    | IN           | Bangalore         |
-     +--------+------------------+--------------+-------------------+
-     | 14601  | Digital Ocean    | SG           | Singapore         |
-     +--------+------------------+--------------+-------------------+
-     | 16276  | OVH              | AU           | Sydney            |
-     +--------+------------------+--------------+-------------------+
-     | 16276  | OVH              | PL           | Warsaw            |
-     +--------+------------------+--------------+-------------------+
-     | 44684  | Mythic Beasts    | UK           | Cambridge         |
-     +--------+------------------+--------------+-------------------+
-     | 60011  | BHost Inc        | US           | Fremont, CA       |
-     +--------+------------------+--------------+-------------------+
-     | 198644 | GO6              | SI           | Ljubljana         |
-     +--------+------------------+--------------+-------------------+
+     +========+===================+==============+===================+
+     | ASN    | AS Name           | Country code | Location          |
+     +========+===================+==============+===================+
+     | 7195   | Edge Uno          | AG           | Buenos Aires      |
+     +--------+-------------------+--------------+-------------------+
+     | 12414  | NL-SOLCON SOLCON  | NL           | Amsterdam         |
+     +--------+-------------------+--------------+-------------------+
+     | 14061  | Digital Ocean     | CA           | Toronto, ON       |
+     +--------+-------------------+--------------+-------------------+
+     | 14061  | Digital Ocean     | USA          | New York City, NY |
+     +--------+-------------------+--------------+-------------------+
+     | 14601  | Digital Ocean     | DE           | Francfort         |
+     +--------+-------------------+--------------+-------------------+
+     | 14601  | Digital Ocean     | IN           | Bangalore         |
+     +--------+-------------------+--------------+-------------------+
+     | 14601  | Digital Ocean     | SG           | Singapore         |
+     +--------+-------------------+--------------+-------------------+
+     | 16276  | OVH               | AU           | Sydney            |
+     +--------+-------------------+--------------+-------------------+
+     | 16276  | OVH               | PL           | Warsaw            |
+     +--------+-------------------+--------------+-------------------+
+     | 44684  | Mythic Beasts     | UK           | Cambridge         |
+     +--------+-------------------+--------------+-------------------+
+     | 47853  | Hostinger         | US           | Ashville, NC      |
+     +--------+-------------------+--------------+-------------------+
+     | 60011  | MYTHIC-BEASTS-USA | US           | Fremont, CA       |
+     +--------+-------------------+--------------+-------------------+
+     | 198644 | GO6               | SI           | Ljubljana         |
+     +--------+-------------------+--------------+-------------------+
 
-                         Table 1: All vantage AS
+                          Table 1: All vantage AS
 
 3.1.1.  Tested Autonomous Systems
 
    During first phase (traffic among fully meshed collaborative nodes),
    our probes have collected data on the following ASs:
 
-       +===========+===============================================+
-       | AS Number | AS Description                                |
-       +===========+===============================================+
-       | 1299      | TWELVE99 Twelve99, Telia Carrier, SE          |
-       +-----------+-----------------------------------------------+
-       | 2914      | NTT-COMMUNICATIONS-2914, US                   |
-       +-----------+-----------------------------------------------+
-       | 3320      | DTAG Internet service provider operations, DE |
-       +-----------+-----------------------------------------------+
-       | 3356      | LEVEL3, US                                    |
-       +-----------+-----------------------------------------------+
-       | 4637      | ASN-TELSTRA-GLOBAL Telstra Global, HK         |
-       +-----------+-----------------------------------------------+
-       | 4755      | TATACOMM-AS TATA Communications formerly VSNL |
-       |           | is Leading ISP, IN                            |
-       +-----------+-----------------------------------------------+
-       | 5603      | SIOL-NET Telekom Slovenije d.d., SI           |
-       +-----------+-----------------------------------------------+
-       | 6453      | AS6453, US                                    |
-       +-----------+-----------------------------------------------+
-       | 6939      | HURRICANE, US                                 |
-       +-----------+-----------------------------------------------+
-       | 9498      | BBIL-AP BHARTI Airtel Ltd., IN                |
-       +-----------+-----------------------------------------------+
-       | 12414     | NL-SOLCON SOLCON, NL                          |
-       +-----------+-----------------------------------------------+
-       | 14061     | DIGITALOCEAN-ASN, US                          |
-       +-----------+-----------------------------------------------+
-       | 34779     | T-2-AS AS set propagated by T-2 d.o.o., SI    |
-       +-----------+-----------------------------------------------+
-       | 198644    | GO6, SI                                       |
-       +-----------+-----------------------------------------------+
+   +===========+======================================+===============+
+   | AS Number | AS Description                       | Comment       |
+   +===========+======================================+===============+
+   | 174       | COGENT-174, US                       | Regional Tier |
+   +-----------+--------------------------------------+---------------+
+   | 1299      | TWELVE99 Twelve99, Telia Carrier, SE | Tier-1        |
+   +-----------+--------------------------------------+---------------+
+   | 2914      | NTT-COMMUNICATIONS-2914, US          | Tier-1        |
+   +-----------+--------------------------------------+---------------+
+   | 3320      | DTAG Internet service provider       | Tier-1        |
+   |           | operations, DE                       |               |
+   +-----------+--------------------------------------+---------------+
+   | 3356      | LEVEL3, US                           | Tier-1        |
+   +-----------+--------------------------------------+---------------+
+   | 4637      | ASN-TELSTRA-GLOBAL Telstra Global,   | Regional Tier |
+   |           | HK                                   |               |
+   +-----------+--------------------------------------+---------------+
+   | 4755      | TATACOMM-AS TATA Communications      |               |
+   |           | formerly VSNL is Leading ISP, IN     |               |
+   +-----------+--------------------------------------+---------------+
+   | 5603      | SIOL-NET Telekom Slovenije d.d., SI  |               |
+   +-----------+--------------------------------------+---------------+
+   | 6453      | Tata Communication                   | Tier-1        |
+   +-----------+--------------------------------------+---------------+
+   | 6762      | SEABONE-NET TELECOM ITALIA SPARKLE   | Tier-1        |
+   |           | S.p.A., IT                           |               |
+   +-----------+--------------------------------------+---------------+
+   | 6939      | HURRICANE, US                        | Regional Tier |
+   +-----------+--------------------------------------+---------------+
+   | 8447      | A1TELEKOM-AT A1 Telekom Austria AG,  |               |
+   |           | AT                                   |               |
+   +-----------+--------------------------------------+---------------+
+   | 9498      | BBIL-AP BHARTI Airtel Ltd., IN       |               |
+   +-----------+--------------------------------------+---------------+
+   | 12414     | NL-SOLCON SOLCON, NL                 |               |
+   +-----------+--------------------------------------+---------------+
+   | 14061     | DIGITALOCEAN-ASN, US                 |               |
+   +-----------+--------------------------------------+---------------+
+   | 21283     | A1SI-AS A1 Slovenija, SI             |               |
+   +-----------+--------------------------------------+---------------+
+   | 34779     | T-2-AS AS set propagated by T-2      |               |
+   |           | d.o.o., SI                           |               |
+   +-----------+--------------------------------------+---------------+
+   | 44684     | MYTHIC Mythic Beasts Ltd, GB         |               |
+   +-----------+--------------------------------------+---------------+
+   | 60011     | MYTHIC-BEASTS-USA, GB                |               |
+   +-----------+--------------------------------------+---------------+
+   | 198644    | GO6, SI                              |               |
+   +-----------+--------------------------------------+---------------+
 
-                Table 2: All AS (source/destination/transit)
+               Table 2: All AS (source/destination/transit)
 
 3.1.2.  Tested Extension Headers
 
@@ -305,7 +327,7 @@ Table of Contents
     | 4755      |          | TATACOMM-AS TATA Communications  |      |
     |           |          | formerly VSNL is Leading ISP, IN |      |
     +-----------+----------+----------------------------------+------+
-    | 6453      | yes      | AS6453, US                       |      |
+    | 6453      | yes      | Tata Communications              |      |
     +-----------+----------+----------------------------------+------+
     | 6939      | regional | HURRICANE, US                    | drop |
     +-----------+----------+----------------------------------+------+
