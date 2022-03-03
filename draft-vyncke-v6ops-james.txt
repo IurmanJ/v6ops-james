@@ -309,15 +309,13 @@ Table of Contents
    The table below lists the few AS that drops packets with the routing
    header type 0.
 
-           +===========+=======================================+
-           | AS Number | AS description                        |
-           +===========+=======================================+
-           | 6939      | HURRICANE, US                         |
-           +-----------+---------------------------------------+
-           | 4637      | ASN-TELSTRA-GLOBAL Telstra Global, HK |
-           +-----------+---------------------------------------+
+                      +===========+================+
+                      | AS Number | AS description |
+                      +===========+================+
+                      | 6939      | HURRICANE, US  |
+                      +-----------+----------------+
 
-                                  Table 3
+                                 Table 3
 
    It is possibly due to a strict implementation of [RFC5095] but it is
    expected that no packet with routing header type 0 would be
