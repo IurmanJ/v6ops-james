@@ -1577,8 +1577,9 @@ svg [stroke="fill"], svg [fill^="#fff"] {
           </tbody>
         </table>
 <p id="section-3.2-10">This is to be expected as SRv6 is specified to run only in a limited domain.<a href="#section-3.2-10" class="pilcrow">¶</a></p>
-<p id="section-3.2-11">Other routing header types (1 == deprecated NIMROD <span>[<a href="#RFC1753" class="xref">RFC1753</a>]</span> , 2 == mobile IPv6 <span>[<a href="#RFC6275" class="xref">RFC6275</a>]</span>,  and even 4 == CRH-16 and 5 == CRH-32<span>[<a href="#I-D.draft-bonica-6man-comp-rtg-hdr" class="xref">I-D.draft-bonica-6man-comp-rtg-hdr</a>]</span>) can be transmitted over the global Internet without being dropped.<a href="#section-3.2-11" class="pilcrow">¶</a></p>
-<p id="section-3.2-12">Some ASs drop packets with hop-by-hop or destination options extension headers, see the following table:<a href="#section-3.2-12" class="pilcrow">¶</a></p>
+<p id="section-3.2-11">Other routing header types (1 == deprecated NIMROD <span>[<a href="#RFC1753" class="xref">RFC1753</a>]</span>, 2 == mobile IPv6 <span>[<a href="#RFC6275" class="xref">RFC6275</a>]</span>,  and even 5 == CRH-16 and 6 == CRH-32<span>[<a href="#I-D.draft-bonica-6man-comp-rtg-hdr" class="xref">I-D.draft-bonica-6man-comp-rtg-hdr</a>]</span>) can be transmitted over the global Internet without being dropped.<a href="#section-3.2-11" class="pilcrow">¶</a></p>
+<p id="section-3.2-12"><em>** below yet to be reviewed without naming AS ? **</em><a href="#section-3.2-12" class="pilcrow">¶</a></p>
+<p id="section-3.2-13">Some ASs drop packets with hop-by-hop or destination options extension headers, see the following table:<a href="#section-3.2-13" class="pilcrow">¶</a></p>
 <table class="center" id="table-6">
           <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
 <thead>
@@ -1606,8 +1607,8 @@ svg [stroke="fill"], svg [fill^="#fff"] {
             </tr>
           </tbody>
         </table>
-<p id="section-3.2-14">The above list seems to include only access providers and no major tier providers.<a href="#section-3.2-14" class="pilcrow">¶</a></p>
-<p id="section-3.2-15">Finally, some ASs do not drop transit traffic (except for routing header type 0) and follow the recommendations of <span>[<a href="#I-D.draft-ietf-opsec-ipv6-eh-filtering" class="xref">I-D.draft-ietf-opsec-ipv6-eh-filtering</a>]</span>. This list includes tier-1 transit providers (using the "regional" tag per <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>):<a href="#section-3.2-15" class="pilcrow">¶</a></p>
+<p id="section-3.2-15">The above list seems to include only access providers and no major tier providers.<a href="#section-3.2-15" class="pilcrow">¶</a></p>
+<p id="section-3.2-16">Finally, some ASs do not drop transit traffic (except for routing header type 0) and follow the recommendations of <span>[<a href="#I-D.draft-ietf-opsec-ipv6-eh-filtering" class="xref">I-D.draft-ietf-opsec-ipv6-eh-filtering</a>]</span>. This list includes tier-1 transit providers (using the "regional" tag per <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>):<a href="#section-3.2-16" class="pilcrow">¶</a></p>
 <table class="center" id="table-7">
           <caption><a href="#table-7" class="selfRef">Table 7</a></caption>
 <thead>
@@ -1795,7 +1796,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">The authors want to thank Sander Steffann and Jan Zorz for allowing the use of their labs. Other to Fernando Gont who indicated a nice IPv6 hosting provider in South America.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">The authors want to thank Sander Steffann and Jan Zorz for allowing the free use of their labs. Other thanks to Fernando Gont who indicated a nice IPv6 hosting provider in South America.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-A-2">Special thanks as well to professor Benoit Donnet for his support and advices. This document would not have existed without his support.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 </section>
 </div>
