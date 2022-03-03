@@ -74,6 +74,7 @@ Table of Contents
      3.1.  Vantage Points
        3.1.1.  Tested Autonomous Systems
        3.1.2.  Tested Extension Headers
+       3.1.3.  Drop attribution to AS
      3.2.  Results
    4.  Security Considerations
    5.  IANA Considerations
@@ -191,6 +192,8 @@ Table of Contents
    +-----------+--------------------------------------+---------------+
    | 6939      | HURRICANE, US                        | Regional Tier |
    +-----------+--------------------------------------+---------------+
+   | 7195      | EDGEUNO SAS, CO                      |               |
+   +-----------+--------------------------------------+---------------+
    | 8447      | A1TELEKOM-AT A1 Telekom Austria AG,  |               |
    |           | AT                                   |               |
    +-----------+--------------------------------------+---------------+
@@ -199,6 +202,8 @@ Table of Contents
    | 12414     | NL-SOLCON SOLCON, NL                 |               |
    +-----------+--------------------------------------+---------------+
    | 14061     | DIGITALOCEAN-ASN, US                 |               |
+   +-----------+--------------------------------------+---------------+
+   | 16276     | OVH, FR                              |               |
    +-----------+--------------------------------------+---------------+
    | 21283     | A1SI-AS A1 Slovenija, SI             |               |
    +-----------+--------------------------------------+---------------+
@@ -258,14 +263,48 @@ Table of Contents
 
    *  143, "ethernet" see section 4.9 of [RFC8986].
 
+3.1.3.  Drop attribution to AS
+
+   Comparing the traceroutes without extension headers and with
+   extension headers allow the attribution of a packet drop to one AS.
+   But, this is not an easy task as inter-AS links often use IPv6
+   address of only one AS (if not using link-local per [RFC7704]).  This
+   document uses the following algorithm to attribute the drop to one AS
+   for packet sourced in one AS and then having a path traversing AS#foo
+   just before AS#bar:
+
+   *  if the packet drop happens at the first router (i.e., hop limit ==
+      1 does not trigger an ICMP hop-limit exceeded), then the drop is
+      assumed to this AS as it is probably an ingress filter on the
+      first router (i.e., the hosting provider in most of the cases -
+      except if colocated with an IXP)
+
+   *  if the packet drop happens in AS#foo after one or more hop(s) in
+      AS#bar, then the drop is assumed to be in AS#foo ingress filter on
+      a router with an interface address in AS#foo
+
+   *  if the packet drop happens in AS#bar after one or more hop(s) in
+      AS#bar before going to AS#foo, then the drop is assumed to be in
+      AS#foo ingress filter on a router with an interface address in
+      AS#bar
+
+   In several cases, the above algorithm was not possible (e.g., some
+   intermediate routers do not generate an ICMP unreachable hop limit
+   exceeded), then the drop is not attributed.  Please also note that
+   the goal of this document is to 'point fingers to operators' but more
+   to evaluate the potential impact.  I.e., a tier-1 provider dropping
+   packets with extension headers has a much bigger impact on the
+   Internet traffic than an access provider.
+
 3.2.  Results
 
-   This section presents the current results out of phase 1 testing.
+   This section presents the current results out of phase 1
+   (collaborating vanytage points) testing.
 
    Packets with some extension headers were never dropped over the
-   Internet: packets with authentication, fragmentation, and routing
-   (type different from 0) headers can freely traverse the global
-   Internet.
+   Internet: packets with authentication, fragmentation (non-atomic
+   fragments), and routing (type different from 0 and 4) headers can
+   freely traverse the global Internet without being dropped.
 
    The table below lists the few AS that drops packets with the routing
    header type 0.
@@ -426,6 +465,10 @@ Table of Contents
               DOI 10.17487/RFC6554, March 2012,
               <https://www.rfc-editor.org/rfc/rfc6554>.
 
+   [RFC7704]  Crocker, D. and N. Clark, "An IETF with Much Diversity and
+              Professional Conduct", RFC 7704, DOI 10.17487/RFC7704,
+              November 2015, <https://www.rfc-editor.org/rfc/rfc7704>.
+
    [RFC7872]  Gont, F., Linkova, J., Chown, T., and W. Liu,
               "Observations on the Dropping of Packets with IPv6
               Extension Headers in the Real World", RFC 7872,
@@ -447,7 +490,7 @@ Acknowledgments
    IPv6 hosting provider in South America.
 
    Special thanks as well to professor Benoit Donnet for his support and
-   advices.  This document would not have existed without their support.
+   advices.  This document would not have existed without his support.
 
 Authors' Addresses
 
