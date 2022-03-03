@@ -1192,12 +1192,12 @@ svg [stroke="fill"], svg [fill^="#fff"] {
       <h2 id="name-methodology">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-methodology" class="section-name selfRef">Methodology</a>
       </h2>
-<p id="section-2-1">In a first phase, the measurement is done between collaborating IPv6 nodes spread over the Internet and multiple Autonomous Systems (ASs). As seen in <a href="#analysed_as" class="xref">Section 3.1.1</a>, the source/destination/transit ASs include some "tier-1" providers per <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>, so, they are probably representative of the global Internet core.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-1">In a first phase, the measurement is done between collaborating IPv6 nodes, a.k.a. vantage points, spread over the Internet and multiple Autonomous Systems (ASs). As seen in <a href="#analysed_as" class="xref">Section 3.1.1</a>, the source/destination/transit ASs include some "tier-1" providers per <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>, so, they are probably representative of the global Internet core.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">Relying on collaborating nodes has some benefits:<a href="#section-2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2-3.1">traffic timing can be measured accurately to answer whether extension headers are slower than plain IP6 packets;<a href="#section-2-3.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-2-3.2">traffic can be captured into .pcap file at the source and at the destination for later analysis.<a href="#section-2-3.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-3.2">traffic can be captured into .pcap <span>[<a href="#I-D.draft-ietf-opsawg-pcap" class="xref">I-D.draft-ietf-opsawg-pcap</a>]</span> file at the source and at the destination for later analysis.<a href="#section-2-3.2" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="section-2-4">Future phases will send probes to non-collaborating nodes with a much reduced probing speed. The destination will include <span>[<a href="#ALEXA" class="xref">ALEXA</a>]</span> top-n websites, popular CDN, as well as random prefix from the IPv6 global routing table. A revision of this IETF draft will describe those experiments.<a href="#section-2-4" class="pilcrow">¶</a></p>
@@ -1213,7 +1213,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
         <h3 id="name-vantage-points">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-vantage-points" class="section-name selfRef">Vantage Points</a>
         </h3>
-<p id="section-3.1-1">Several servers were used worldwide (albeit missing Africa as authors were unable to find IPv6 servers in these regions). <a href="#table_vantage" class="xref">Table 1</a> lists all the vantage points together with their AS number and country.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">Several servers were used worldwide (albeit missing Africa and China as authors were unable to find IPv6 servers in these regions). <a href="#table_vantage" class="xref">Table 1</a> lists all the vantage points together with their AS number and country.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <span id="name-all-vantage-as"></span><div id="table_vantage">
 <table class="center" id="table-1">
           <caption>
@@ -1443,9 +1443,10 @@ svg [stroke="fill"], svg [fill^="#fff"] {
             </tbody>
           </table>
 </div>
+<p id="section-3.1.1-3">While this document lists some operators, the intent if not to build a wall of fame or a wall of shame but more to get a idea about which kind of providers drop packets with extension headers and how widespread the drop policy is enforced.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="tested-extension-headers">
+<div id="tested_eh">
 <section id="section-3.1.2">
           <h4 id="name-tested-extension-headers">
 <a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-tested-extension-headers" class="section-name selfRef">Tested Extension Headers</a>
@@ -1458,9 +1459,11 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 </li>
             <li class="normal" id="section-3.1.2-2.3">routing header with routing types from 0 to 6 inclusive ;<a href="#section-3.1.2-2.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-3.1.2-2.4">atomic fragment header (i.e., more flag = 0 and offset = 0) or varying frame length 512, 1280, and 1492 octets;<a href="#section-3.1.2-2.4" class="pilcrow">¶</a>
+            <li class="normal" id="section-3.1.2-2.4">atomic fragment header (i.e., more flag = 0 and offset = 0) or varying frame length 512, 1280, and 1500 octets;<a href="#section-3.1.2-2.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-3.1.2-2.5">authentication header with dummy SPI followed by UDP/TCP header and a 38 octets payload.<a href="#section-3.1.2-2.5" class="pilcrow">¶</a>
+            <li class="normal" id="section-3.1.2-2.5">non-atomic fragment header (i.e., more flag = 1 and offset = 0) or varying frame length 512, 1280, and 1500 octets;<a href="#section-3.1.2-2.5" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.1.2-2.6">authentication header with dummy SPI followed by UDP/TCP header and a 38 octets payload.<a href="#section-3.1.2-2.6" class="pilcrow">¶</a>
 </li>
           </ul>
 <p id="section-3.1.2-3">In the above, length is the length of the extension header itself except for the fragmentation header where the length is the frame length (i.e., including the Ethernet, IPv6, and TCP/UDP headers + payload).<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
@@ -1481,7 +1484,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
           </h4>
 <p id="section-3.1.3-1">Comparing the traceroutes without extension headers and with extension headers allow the attribution of a packet drop to one AS. But, this is not an easy task as inter-AS links often use IPv6 address of only one AS (if not using link-local per <span>[<a href="#RFC7704" class="xref">RFC7704</a>]</span>). This document uses the following algorithm to attribute the drop to one AS for packet sourced in one AS and then having a path traversing AS#foo just before AS#bar:<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.1.3-2.1">if the packet drop happens at the first router (i.e., hop limit == 1 does not trigger an ICMP hop-limit exceeded), then the drop is assumed to this AS as it is probably an ingress filter on the first router (i.e., the hosting provider in most of the cases - except if colocated with an IXP)<a href="#section-3.1.3-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-3.1.3-2.1">if the packet drop happens at the first router (i.e., hop limit == 1 does not trigger an ICMP hop-limit exceeded), then the drop is assumed to this AS as it is probably an ingress filter on the first router (i.e., the hosting provider in most of the cases - except if colocated with an IXP).<a href="#section-3.1.3-2.1" class="pilcrow">¶</a>
 </li>
             <li class="normal" id="section-3.1.3-2.2">if the packet drop happens in AS#foo after one or more hop(s) in AS#bar, then the drop is assumed to be in AS#foo ingress filter on a router with an interface address in AS#foo<a href="#section-3.1.3-2.2" class="pilcrow">¶</a>
 </li>
@@ -1498,11 +1501,51 @@ svg [stroke="fill"], svg [fill^="#fff"] {
         <h3 id="name-results">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-results" class="section-name selfRef">Results</a>
         </h3>
-<p id="section-3.2-1">This section presents the current results out of phase 1 (collaborating vanytage points) testing.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">Packets with some extension headers were never dropped over the Internet: packets with authentication, fragmentation (non-atomic fragments), and routing (type different from 0 and 4) headers can freely traverse the global Internet without being dropped.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">The table below lists the few AS that drops packets with the routing header type 0.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">This section presents the current results out of phase 1 (collaborating vantage points) testing. About 4860 experiments were run, one experiment being defined by sending packets between 2 vantage points with hop-limit varying from 1 to the number of hops between the two vantage points and for all the extension headers described in <a href="#tested_eh" class="xref">Section 3.1.2</a>.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">Packets with some extension headers were never dropped over the Internet: packets with authentication, fragmentation (non-atomic fragments), and routing (routing type different from 0 and 4) headers can freely traverse the global Internet without being dropped.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">The following table lists all routing header type and the percentage of experiments that were successful, i.e., packets with routing header reaching their destination:<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <table class="center" id="table-3">
           <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Routing Header Type</th>
+              <th class="text-left" rowspan="1" colspan="1">%-age of experiments reaching destination]</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">0</td>
+              <td class="text-left" rowspan="1" colspan="1">80.9%</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">1</td>
+              <td class="text-left" rowspan="1" colspan="1">99.5%</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">2</td>
+              <td class="text-left" rowspan="1" colspan="1">99.5%</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">3</td>
+              <td class="text-left" rowspan="1" colspan="1">not tested</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">4</td>
+              <td class="text-left" rowspan="1" colspan="1">69.0%</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">5</td>
+              <td class="text-left" rowspan="1" colspan="1">99.5%</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">6</td>
+              <td class="text-left" rowspan="1" colspan="1">99.3%</td>
+            </tr>
+          </tbody>
+        </table>
+<p id="section-3.2-5">The table below lists the few ASs that drop packets with the routing header type 0 (the original source routing header, which is now deprecated).<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+<table class="center" id="table-4">
+          <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">AS Number</th>
@@ -1516,10 +1559,28 @@ svg [stroke="fill"], svg [fill^="#fff"] {
             </tr>
           </tbody>
         </table>
-<p id="section-3.2-5">It is possibly due to a strict implementation of <span>[<a href="#RFC5095" class="xref">RFC5095</a>]</span> but it is expected that no packet with routing header type 0 would be transmitted anymore. Other routing header types (mobile IPv6 <span>[<a href="#RFC6275" class="xref">RFC6275</a>]</span>, RPL <span>[<a href="#RFC6554" class="xref">RFC6554</a>]</span>, SRH <span>[<a href="#RFC8754" class="xref">RFC8754</a>]</span>, and even CRH-16 and CRH-32<span>[<a href="#I-D.draft-bonica-6man-comp-rtg-hdr" class="xref">I-D.draft-bonica-6man-comp-rtg-hdr</a>]</span>) can be transmitted over the global Internet without being dropped.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
-<p id="section-3.2-6">Some ASs drop packets with hop-by-hop or destination options extension headers, see the following table:<a href="#section-3.2-6" class="pilcrow">¶</a></p>
-<table class="center" id="table-4">
-          <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
+<p id="section-3.2-7">It is possibly due to a strict implementation of <span>[<a href="#RFC5095" class="xref">RFC5095</a>]</span> but it is expected that no packet with routing header type 0 would be transmitted anymore. So, this is not surprizing.<a href="#section-3.2-7" class="pilcrow">¶</a></p>
+<p id="section-3.2-8">The table below lists the few ASs that drop packets with the routing header type 4 (RH <span>[<a href="#RFC8754" class="xref">RFC8754</a>]</span>).<a href="#section-3.2-8" class="pilcrow">¶</a></p>
+<table class="center" id="table-5">
+          <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">AS Number</th>
+              <th class="text-left" rowspan="1" colspan="1">AS description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">16276</td>
+              <td class="text-left" rowspan="1" colspan="1">OVH, FR</td>
+            </tr>
+          </tbody>
+        </table>
+<p id="section-3.2-10">This is to be expected as SRv6 is specified to run only in a limited domain.<a href="#section-3.2-10" class="pilcrow">¶</a></p>
+<p id="section-3.2-11">Other routing header types (1 == deprecated NIMROD <span>[<a href="#RFC1753" class="xref">RFC1753</a>]</span> , 2 == mobile IPv6 <span>[<a href="#RFC6275" class="xref">RFC6275</a>]</span>,  and even 4 == CRH-16 and 5 == CRH-32<span>[<a href="#I-D.draft-bonica-6man-comp-rtg-hdr" class="xref">I-D.draft-bonica-6man-comp-rtg-hdr</a>]</span>) can be transmitted over the global Internet without being dropped.<a href="#section-3.2-11" class="pilcrow">¶</a></p>
+<p id="section-3.2-12">Some ASs drop packets with hop-by-hop or destination options extension headers, see the following table:<a href="#section-3.2-12" class="pilcrow">¶</a></p>
+<table class="center" id="table-6">
+          <caption><a href="#table-6" class="selfRef">Table 6</a></caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">AS Number</th>
@@ -1545,10 +1606,10 @@ svg [stroke="fill"], svg [fill^="#fff"] {
             </tr>
           </tbody>
         </table>
-<p id="section-3.2-8">The above list seems to include only access providers and no major tier providers.<a href="#section-3.2-8" class="pilcrow">¶</a></p>
-<p id="section-3.2-9">Finally, some ASs do not drop transit traffic (except for routing header type 0) and follow the recommendations of <span>[<a href="#I-D.draft-ietf-opsec-ipv6-eh-filtering" class="xref">I-D.draft-ietf-opsec-ipv6-eh-filtering</a>]</span>. This list includes tier-1 transit providers (using the "regional" tag per <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>):<a href="#section-3.2-9" class="pilcrow">¶</a></p>
-<table class="center" id="table-5">
-          <caption><a href="#table-5" class="selfRef">Table 5</a></caption>
+<p id="section-3.2-14">The above list seems to include only access providers and no major tier providers.<a href="#section-3.2-14" class="pilcrow">¶</a></p>
+<p id="section-3.2-15">Finally, some ASs do not drop transit traffic (except for routing header type 0) and follow the recommendations of <span>[<a href="#I-D.draft-ietf-opsec-ipv6-eh-filtering" class="xref">I-D.draft-ietf-opsec-ipv6-eh-filtering</a>]</span>. This list includes tier-1 transit providers (using the "regional" tag per <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>):<a href="#section-3.2-15" class="pilcrow">¶</a></p>
+<table class="center" id="table-7">
+          <caption><a href="#table-7" class="selfRef">Table 7</a></caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">AS Number</th>
@@ -1682,6 +1743,10 @@ svg [stroke="fill"], svg [fill^="#fff"] {
         <dd>
 <span class="refAuthor">Bonica, R.</span>, <span class="refAuthor">Kamite, Y.</span>, <span class="refAuthor">Alston, A.</span>, <span class="refAuthor">Henriques, D.</span>, and <span class="refAuthor">L. Jalil</span>, <span class="refTitle">"The IPv6 Compact Routing Header (CRH)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bonica-6man-comp-rtg-hdr-27</span>, <time datetime="2021-11-15" class="refDate">15 November 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bonica-6man-comp-rtg-hdr-27">https://datatracker.ietf.org/doc/html/draft-bonica-6man-comp-rtg-hdr-27</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.draft-ietf-opsawg-pcap">[I-D.draft-ietf-opsawg-pcap]</dt>
+        <dd>
+<span class="refAuthor">Harris, G.</span> and <span class="refAuthor">M. C. Richardson</span>, <span class="refTitle">"PCAP Capture File Format"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-pcap-00</span>, <time datetime="2021-10-25" class="refDate">25 October 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-pcap-00">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-pcap-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.draft-ietf-opsec-ipv6-eh-filtering">[I-D.draft-ietf-opsec-ipv6-eh-filtering]</dt>
         <dd>
 <span class="refAuthor">Gont, F.</span> and <span class="refAuthor">W. (. Liu</span>, <span class="refTitle">"Recommendations on the Filtering of IPv6 Packets Containing IPv6 Extension Headers at Transit Routers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsec-ipv6-eh-filtering-08</span>, <time datetime="2021-06-03" class="refDate">3 June 2021</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsec-ipv6-eh-filtering-08">https://datatracker.ietf.org/doc/html/draft-ietf-opsec-ipv6-eh-filtering-08</a>&gt;</span>. </dd>
@@ -1689,6 +1754,10 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <dt id="I-D.draft-vyncke-opsec-probe-attribution">[I-D.draft-vyncke-opsec-probe-attribution]</dt>
         <dd>
 <span class="refAuthor">Vyncke, É.</span>, <span class="refAuthor">Donnet, B.</span>, and <span class="refAuthor">J. Iurman</span>, <span class="refTitle">"Attribution of Internet Probes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-vyncke-opsec-probe-attribution-01</span>, <time datetime="2022-03-03" class="refDate">3 March 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-vyncke-opsec-probe-attribution-01">https://datatracker.ietf.org/doc/html/draft-vyncke-opsec-probe-attribution-01</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC1753">[RFC1753]</dt>
+        <dd>
+<span class="refAuthor">Chiappa, N.</span>, <span class="refTitle">"IPng Technical Requirements Of the Nimrod Routing and Addressing Architecture"</span>, <span class="seriesInfo">RFC 1753</span>, <span class="seriesInfo">DOI 10.17487/RFC1753</span>, <time datetime="1994-12" class="refDate">December 1994</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc1753">https://www.rfc-editor.org/rfc/rfc1753</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC4942">[RFC4942]</dt>
         <dd>
@@ -1701,10 +1770,6 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <dt id="RFC6275">[RFC6275]</dt>
         <dd>
 <span class="refAuthor">Perkins, C., Ed.</span>, <span class="refAuthor">Johnson, D.</span>, and <span class="refAuthor">J. Arkko</span>, <span class="refTitle">"Mobility Support in IPv6"</span>, <span class="seriesInfo">RFC 6275</span>, <span class="seriesInfo">DOI 10.17487/RFC6275</span>, <time datetime="2011-07" class="refDate">July 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6275">https://www.rfc-editor.org/rfc/rfc6275</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC6554">[RFC6554]</dt>
-        <dd>
-<span class="refAuthor">Hui, J.</span>, <span class="refAuthor">Vasseur, JP.</span>, <span class="refAuthor">Culler, D.</span>, and <span class="refAuthor">V. Manral</span>, <span class="refTitle">"An IPv6 Routing Header for Source Routes with the Routing Protocol for Low-Power and Lossy Networks (RPL)"</span>, <span class="seriesInfo">RFC 6554</span>, <span class="seriesInfo">DOI 10.17487/RFC6554</span>, <time datetime="2012-03" class="refDate">March 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6554">https://www.rfc-editor.org/rfc/rfc6554</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7704">[RFC7704]</dt>
         <dd>

@@ -99,18 +99,19 @@ Table of Contents
 2.  Methodology
 
    In a first phase, the measurement is done between collaborating IPv6
-   nodes spread over the Internet and multiple Autonomous Systems (ASs).
-   As seen in Section 3.1.1, the source/destination/transit ASs include
-   some "tier-1" providers per [TIER1], so, they are probably
-   representative of the global Internet core.
+   nodes, a.k.a. vantage points, spread over the Internet and multiple
+   Autonomous Systems (ASs).  As seen in Section 3.1.1, the
+   source/destination/transit ASs include some "tier-1" providers per
+   [TIER1], so, they are probably representative of the global Internet
+   core.
 
    Relying on collaborating nodes has some benefits:
 
    *  traffic timing can be measured accurately to answer whether
       extension headers are slower than plain IP6 packets;
 
-   *  traffic can be captured into .pcap file at the source and at the
-      destination for later analysis.
+   *  traffic can be captured into .pcap [I-D.draft-ietf-opsawg-pcap]
+      file at the source and at the destination for later analysis.
 
    Future phases will send probes to non-collaborating nodes with a much
    reduced probing speed.  The destination will include [ALEXA] top-n
@@ -122,9 +123,10 @@ Table of Contents
 
 3.1.  Vantage Points
 
-   Several servers were used worldwide (albeit missing Africa as authors
-   were unable to find IPv6 servers in these regions).  Table 1 lists
-   all the vantage points together with their AS number and country.
+   Several servers were used worldwide (albeit missing Africa and China
+   as authors were unable to find IPv6 servers in these regions).
+   Table 1 lists all the vantage points together with their AS number
+   and country.
 
      +========+===================+==============+===================+
      | ASN    | AS Name           | Country code | Location          |
@@ -219,6 +221,11 @@ Table of Contents
 
                Table 2: All AS (source/destination/transit)
 
+   While this document lists some operators, the intent if not to build
+   a wall of fame or a wall of shame but more to get a idea about which
+   kind of providers drop packets with extension headers and how
+   widespread the drop policy is enforced.
+
 3.1.2.  Tested Extension Headers
 
    In the first phase among collaborating vantage points, packets always
@@ -240,7 +247,10 @@ Table of Contents
    *  routing header with routing types from 0 to 6 inclusive ;
 
    *  atomic fragment header (i.e., more flag = 0 and offset = 0) or
-      varying frame length 512, 1280, and 1492 octets;
+      varying frame length 512, 1280, and 1500 octets;
+
+   *  non-atomic fragment header (i.e., more flag = 1 and offset = 0) or
+      varying frame length 512, 1280, and 1500 octets;
 
    *  authentication header with dummy SPI followed by UDP/TCP header
       and a 38 octets payload.
@@ -277,7 +287,7 @@ Table of Contents
       1 does not trigger an ICMP hop-limit exceeded), then the drop is
       assumed to this AS as it is probably an ingress filter on the
       first router (i.e., the hosting provider in most of the cases -
-      except if colocated with an IXP)
+      except if colocated with an IXP).
 
    *  if the packet drop happens in AS#foo after one or more hop(s) in
       AS#bar, then the drop is assumed to be in AS#foo ingress filter on
@@ -299,15 +309,44 @@ Table of Contents
 3.2.  Results
 
    This section presents the current results out of phase 1
-   (collaborating vanytage points) testing.
+   (collaborating vantage points) testing.  About 4860 experiments were
+   run, one experiment being defined by sending packets between 2
+   vantage points with hop-limit varying from 1 to the number of hops
+   between the two vantage points and for all the extension headers
+   described in Section 3.1.2.
 
    Packets with some extension headers were never dropped over the
    Internet: packets with authentication, fragmentation (non-atomic
-   fragments), and routing (type different from 0 and 4) headers can
-   freely traverse the global Internet without being dropped.
+   fragments), and routing (routing type different from 0 and 4) headers
+   can freely traverse the global Internet without being dropped.
 
-   The table below lists the few AS that drops packets with the routing
-   header type 0.
+   The following table lists all routing header type and the percentage
+   of experiments that were successful, i.e., packets with routing
+   header reaching their destination:
+
+   +=====================+============================================+
+   | Routing Header Type | %-age of experiments reaching destination] |
+   +=====================+============================================+
+   | 0                   | 80.9%                                      |
+   +---------------------+--------------------------------------------+
+   | 1                   | 99.5%                                      |
+   +---------------------+--------------------------------------------+
+   | 2                   | 99.5%                                      |
+   +---------------------+--------------------------------------------+
+   | 3                   | not tested                                 |
+   +---------------------+--------------------------------------------+
+   | 4                   | 69.0%                                      |
+   +---------------------+--------------------------------------------+
+   | 5                   | 99.5%                                      |
+   +---------------------+--------------------------------------------+
+   | 6                   | 99.3%                                      |
+   +---------------------+--------------------------------------------+
+
+                                 Table 3
+
+   The table below lists the few ASs that drop packets with the routing
+   header type 0 (the original source routing header, which is now
+   deprecated).
 
                       +===========+================+
                       | AS Number | AS description |
@@ -315,12 +354,28 @@ Table of Contents
                       | 6939      | HURRICANE, US  |
                       +-----------+----------------+
 
-                                 Table 3
+                                 Table 4
 
    It is possibly due to a strict implementation of [RFC5095] but it is
    expected that no packet with routing header type 0 would be
-   transmitted anymore.  Other routing header types (mobile IPv6
-   [RFC6275], RPL [RFC6554], SRH [RFC8754], and even CRH-16 and CRH-
+   transmitted anymore.  So, this is not surprizing.
+
+   The table below lists the few ASs that drop packets with the routing
+   header type 4 (RH [RFC8754]).
+
+                      +===========+================+
+                      | AS Number | AS description |
+                      +===========+================+
+                      | 16276     | OVH, FR        |
+                      +-----------+----------------+
+
+                                 Table 5
+
+   This is to be expected as SRv6 is specified to run only in a limited
+   domain.
+
+   Other routing header types (1 == deprecated NIMROD [RFC1753] , 2 ==
+   mobile IPv6 [RFC6275], and even 4 == CRH-16 and 5 == CRH-
    32[I-D.draft-bonica-6man-comp-rtg-hdr]) can be transmitted over the
    global Internet without being dropped.
 
@@ -339,7 +394,7 @@ Table of Contents
         | 198644    | GO6, SI                                    |
         +-----------+--------------------------------------------+
 
-                                 Table 4
+                                 Table 6
 
    The above list seems to include only access providers and no major
    tier providers.
@@ -378,7 +433,7 @@ Table of Contents
     | 14061     |          | DIGITALOCEAN-ASN, US             |      |
     +-----------+----------+----------------------------------+------+
 
-                                 Table 5
+                                 Table 7
 
 4.  Security Considerations
 
@@ -428,6 +483,13 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-bonica-6man-
               comp-rtg-hdr-27>.
 
+   [I-D.draft-ietf-opsawg-pcap]
+              Harris, G. and M. C. Richardson, "PCAP Capture File
+              Format", Work in Progress, Internet-Draft, draft-ietf-
+              opsawg-pcap-00, 25 October 2021,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
+              pcap-00>.
+
    [I-D.draft-ietf-opsec-ipv6-eh-filtering]
               Gont, F. and W. (. Liu, "Recommendations on the Filtering
               of IPv6 Packets Containing IPv6 Extension Headers at
@@ -443,6 +505,11 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-vyncke-opsec-
               probe-attribution-01>.
 
+   [RFC1753]  Chiappa, N., "IPng Technical Requirements Of the Nimrod
+              Routing and Addressing Architecture", RFC 1753,
+              DOI 10.17487/RFC1753, December 1994,
+              <https://www.rfc-editor.org/rfc/rfc1753>.
+
    [RFC4942]  Davies, E., Krishnan, S., and P. Savola, "IPv6 Transition/
               Co-existence Security Considerations", RFC 4942,
               DOI 10.17487/RFC4942, September 2007,
@@ -456,12 +523,6 @@ Table of Contents
    [RFC6275]  Perkins, C., Ed., Johnson, D., and J. Arkko, "Mobility
               Support in IPv6", RFC 6275, DOI 10.17487/RFC6275, July
               2011, <https://www.rfc-editor.org/rfc/rfc6275>.
-
-   [RFC6554]  Hui, J., Vasseur, JP., Culler, D., and V. Manral, "An IPv6
-              Routing Header for Source Routes with the Routing Protocol
-              for Low-Power and Lossy Networks (RPL)", RFC 6554,
-              DOI 10.17487/RFC6554, March 2012,
-              <https://www.rfc-editor.org/rfc/rfc6554>.
 
    [RFC7704]  Crocker, D. and N. Clark, "An IETF with Much Diversity and
               Professional Conduct", RFC 7704, DOI 10.17487/RFC7704,
