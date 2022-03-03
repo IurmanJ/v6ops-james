@@ -5,9 +5,9 @@
 IPv6 Operations                                                E. Vyncke
 Internet-Draft                                                     Cisco
 Intended status: Informational                                   R. Léas
-Expires: 26 August 2022                                        J. Iurman
+Expires: 4 September 2022                                      J. Iurman
                                                      Université de Liège
-                                                        22 February 2022
+                                                            3 March 2022
 
 
    Just Another Measurement of Extension header Survivability (JAMES)
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 August 2022.
+   This Internet-Draft will expire on 4 September 2022.
 
 Copyright Notice
 
@@ -108,11 +108,11 @@ Table of Contents
    *  traffic timing can be measured accurately to answer whether
       extension headers are slower than plain IP6 packets;
 
-   *  traffic can be capture into .pcap file at the source and at the
+   *  traffic can be captured into .pcap file at the source and at the
       destination for later analysis.
 
    Future phases will send probes to non-collaborating nodes with a much
-   reduce probing speed.  The destination will include [ALEXA] top-n
+   reduced probing speed.  The destination will include [ALEXA] top-n
    websites, popular CDN, as well as random prefix from the IPv6 global
    routing table.  A revision of this IETF draft will describe those
    experiments.
@@ -121,10 +121,9 @@ Table of Contents
 
 3.1.  Vantage Points
 
-   Several servers were used worldwide (albeit missing South America and
-   Africa as authors were unable to have IPv6 servers in these regions).
-   Table 1 lists all the vantage points together with their AS number
-   and country.
+   Several servers were used worldwide (albeit missing Africa as authors
+   were unable to find IPv6 servers in these regions).  Table 1 lists
+   all the vantage points together with their AS number and country.
 
      +========+===================+==============+===================+
      | ASN    | AS Name           | Country code | Location          |
@@ -217,13 +216,13 @@ Table of Contents
 
 3.1.2.  Tested Extension Headers
 
-   In the first phase, packets always contain either a UDP payload or a
-   TCP payload, the latter is sent with only the SYN flag set and with
-   data as permitted by section 3.4 of [RFC793] (2nd paragraph).  A
-   usual traceroute is done with only the UDP/TCP payload without any
-   extension header with varying hop-limit in order to learn the
-   traversed routers and ASs.  Then, several UDP/TCP probes are sent by
-   with a set of extension headers:
+   In the first phase among collaborating vantage points, packets always
+   contained either a UDP payload or a TCP payload, the latter is sent
+   with only the SYN flag set and with data as permitted by section 3.4
+   of [RFC793] (2nd paragraph).  A usual traceroute is done with only
+   the UDP/TCP payload without any extension header with varying hop-
+   limit in order to learn the traversed routers and ASs.  Then, several
+   UDP/TCP probes are sent by with a set of extension headers:
 
    *  destination options header containing either an unknown option
       with the "skip" bits or an unknown option with the "discard" bits
@@ -245,6 +244,12 @@ Table of Contents
    except for the fragmentation header where the length is the frame
    length (i.e., including the Ethernet, IPv6, and TCP/UDP headers +
    payload).
+
+   For hop-by-hop and destination options headers, when required
+   multiple PadN options were used in order to bypass some Linux kernels
+   that consider a PadN larger than 8 bytes is an attack, see section
+   5.3 of [BCP220], even if multiple PadN options violates section
+   2.1.9.5 of [RFC4942].
 
    Next phases will also include packets without UDP/TCP but with Next-
    Header being:
@@ -342,8 +347,8 @@ Table of Contents
 
    While active probing of the Internet may be considered as an attack,
    this measurement was done among collaborating parties and using the
-   probe attribution technique described in I-D.draft-vyncke-opsec-
-   probe-attribution.
+   probe attribution technique described in
+   [I-D.draft-vyncke-opsec-probe-attribution].
 
 5.  IANA Considerations
 
@@ -373,6 +378,11 @@ Table of Contents
    [ALEXA]    "The top 500 sites on the web", n.d.,
               <https://www.alexa.com/topsites>.
 
+   [BCP220]   Chown, T., Loughney, J., and T. Winters, "IPv6 Node
+              Requirements", BCP 220, RFC 8504, January 2019.
+
+              <https://www.rfc-editor.org/info/bcp220>
+
    [I-D.draft-bonica-6man-comp-rtg-hdr]
               Bonica, R., Kamite, Y., Alston, A., Henriques, D., and L.
               Jalil, "The IPv6 Compact Routing Header (CRH)", Work in
@@ -388,6 +398,18 @@ Table of Contents
               ietf-opsec-ipv6-eh-filtering-08, 3 June 2021,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsec-
               ipv6-eh-filtering-08>.
+
+   [I-D.draft-vyncke-opsec-probe-attribution]
+              Vyncke, É., Donnet, B., and J. Iurman, "Attribution of
+              Internet Probes", Work in Progress, Internet-Draft, draft-
+              vyncke-opsec-probe-attribution-01, 3 March 2022,
+              <https://datatracker.ietf.org/doc/html/draft-vyncke-opsec-
+              probe-attribution-01>.
+
+   [RFC4942]  Davies, E., Krishnan, S., and P. Savola, "IPv6 Transition/
+              Co-existence Security Considerations", RFC 4942,
+              DOI 10.17487/RFC4942, September 2007,
+              <https://www.rfc-editor.org/rfc/rfc4942>.
 
    [RFC5095]  Abley, J., Savola, P., and G. Neville-Neil, "Deprecation
               of Type 0 Routing Headers in IPv6", RFC 5095,
@@ -421,11 +443,11 @@ Table of Contents
 Acknowledgments
 
    The authors want to thank Sander Steffann and Jan Zorz for allowing
-   the use of their labs.
+   the use of their labs.  Other to Fernando Gont who indicated a nice
+   IPv6 hosting provider in South America.
 
-   Special thanks as well to professor Benoit Donnet and research
-   assistant Justin Iurman for their support and advices.  This document
-   would not have existed without their support.
+   Special thanks as well to professor Benoit Donnet for his support and
+   advices.  This document would not have existed without their support.
 
 Authors' Addresses
 
