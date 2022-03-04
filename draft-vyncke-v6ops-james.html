@@ -1355,7 +1355,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">174</td>
                 <td class="text-left" rowspan="1" colspan="1">COGENT-174, US</td>
-                <td class="text-left" rowspan="1" colspan="1">Regional Tier</td>
+                <td class="text-left" rowspan="1" colspan="1">Tier-1</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">1299</td>
@@ -1465,7 +1465,8 @@ svg [stroke="fill"], svg [fill^="#fff"] {
             </tbody>
           </table>
 </div>
-<p id="section-3.1.1-3">While this document lists some operators, the intent if not to build a wall of fame or a wall of shame but more to get a idea about which kind of providers drop packets with extension headers and how widespread the drop policy is enforced.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-3">The table attributes some tier qualification to some ASs based on the Wikipedia page <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>, but there are no common way to decide who is a tier-1. Based on some CAIDA research, all the above (except GO6, which is a stub network) are transit providers.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-4">While this document lists some operators, the intent is not to build a wall of fame or a wall of shame but more to get an idea about which kind of providers drop packets with extension headers and how widespread the drop policy is enforced and where, i.e., in the access provider or in the core of the Internet.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="tested_eh">
@@ -1473,24 +1474,35 @@ svg [stroke="fill"], svg [fill^="#fff"] {
           <h4 id="name-tested-extension-headers">
 <a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-tested-extension-headers" class="section-name selfRef">Tested Extension Headers</a>
           </h4>
-<p id="section-3.1.2-1">In the first phase among collaborating vantage points, packets always contained either a UDP payload or a TCP payload, the latter is sent with only the SYN flag set and with data as permitted by section 3.4 of <span>[<a href="#RFC793" class="xref">RFC793</a>]</span> (2nd paragraph). A usual traceroute is done with only the UDP/TCP payload without any extension header with varying hop-limit in order to learn the traversed routers and ASs. Then, several UDP/TCP probes are sent by with a set of extension headers:<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-1">In the first phase among collaborating vantage points, packets always contained either a UDP payload or a TCP payload, the latter is sent with only the SYN flag set and with data as permitted by section 3.4 of <span>[<a href="#RFC793" class="xref">RFC793</a>]</span> (2nd paragraph). A usual traceroute is done with only the UDP/TCP payload without any extension header with varying hop-limit in order to learn the traversed routers and ASs. Then, several UDP/TCP probes are sent with a set of extension headers:<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.1.2-2.1">destination options header containing either an unknown option with the "skip" bits or an unknown option with the "discard" bits of varying extension header length: 8, 256, and 512 octets;<a href="#section-3.1.2-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-3.1.2-2.1">
+              <p id="section-3.1.2-2.1.1">hop-by-hop and destination options header containing:<a href="#section-3.1.2-2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.1.2-2.1.2.1">one PadN option for an extension header length of 8 octets,<a href="#section-3.1.2-2.1.2.1" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-3.1.2-2.2">hop-by-hop options header containing either an unknown option with the "skip" bits or an unknown option with the "discard" bits of varying extension header length: 8, 256, and 512 octets;<a href="#section-3.1.2-2.2" class="pilcrow">¶</a>
+                <li class="normal" id="section-3.1.2-2.1.2.2">one unknown option with the "discard" bits for an extension header length of 8 octets,<a href="#section-3.1.2-2.1.2.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-3.1.2-2.3">routing header with routing types from 0 to 6 inclusive (except for type 3);<a href="#section-3.1.2-2.3" class="pilcrow">¶</a>
+                <li class="normal" id="section-3.1.2-2.1.2.3">several PaDN options for an extension header length of 256 octets,<a href="#section-3.1.2-2.1.2.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-3.1.2-2.4">atomic fragment header (i.e., M-flag = 0 and offset = 0) or varying frame length 512, 1280, and 1500 octets;<a href="#section-3.1.2-2.4" class="pilcrow">¶</a>
+                <li class="normal" id="section-3.1.2-2.1.2.4">one unknown option (two sets with "discard" and "skip" bits) for an extension header length of 256 octets,<a href="#section-3.1.2-2.1.2.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-3.1.2-2.5">non-atomic first fragment header (i.e., M-flag = 1 and offset = 0) or varying frame length 512, 1280, and 1500 octets;<a href="#section-3.1.2-2.5" class="pilcrow">¶</a>
+                <li class="normal" id="section-3.1.2-2.1.2.5">one unknown option (two sets with "discard" and "skip" bits) for an extension header length of 512 octets.<a href="#section-3.1.2-2.1.2.5" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-3.1.2-2.6">authentication header with dummy SPI followed by UDP/TCP header and a 38 octets payload.<a href="#section-3.1.2-2.6" class="pilcrow">¶</a>
+              </ul>
+</li>
+            <li class="normal" id="section-3.1.2-2.2">routing header with routing types from 0 to 6 inclusive (except for type 3);<a href="#section-3.1.2-2.2" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.1.2-2.3">atomic fragment header (i.e., M-flag = 0 and offset = 0) of varying frame length 512, 1280, and 1500 octets;<a href="#section-3.1.2-2.3" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.1.2-2.4">non-atomic first fragment header (i.e., M-flag = 1 and offset = 0) of varying frame length 512, 1280, and 1500 octets;<a href="#section-3.1.2-2.4" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.1.2-2.5">authentication header with dummy SPI followed by UDP/TCP header and a 38 octets payload.<a href="#section-3.1.2-2.5" class="pilcrow">¶</a>
 </li>
           </ul>
-<p id="section-3.1.2-3">In the above, length is the length of the extension header itself except for the fragmentation header where the length is the frame length (i.e., including the Ethernet, IPv6, and TCP/UDP headers + payload).<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-3">In the above, length is the length of the extension header itself except for the fragmentation header where the length is the IP packet length (i.e., including the IPv6, and TCP/UDP headers + payload).<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-4">For hop-by-hop and destination options headers, when required multiple PadN options were used in order to bypass some Linux kernels that consider a PadN larger than 8 bytes is an attack, see section 5.3 of <span>[<a href="#BCP220" class="xref">BCP220</a>]</span>, even if multiple PadN options violates section 2.1.9.5 of <span>[<a href="#RFC4942" class="xref">RFC4942</a>]</span>.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-5">Next phases will also include packets without UDP/TCP but with Next-Header being:<a href="#section-3.1.2-5" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-5">Next phases will also include packets without UDP/TCP transport header but with Next-Header being:<a href="#section-3.1.2-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1.2-6.1">59, "no next header" see section 4.7 of <span>[<a href="#RFC8200" class="xref">RFC8200</a>]</span>;<a href="#section-3.1.2-6.1" class="pilcrow">¶</a>
 </li>
@@ -1504,7 +1516,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
           <h4 id="name-drop-attribution-to-as">
 <a href="#section-3.1.3" class="section-number selfRef">3.1.3. </a><a href="#name-drop-attribution-to-as" class="section-name selfRef">Drop attribution to AS</a>
           </h4>
-<p id="section-3.1.3-1">Comparing the traceroutes without extension headers and with extension headers allow the attribution of a packet drop to one AS. But, this is not an easy task as inter-AS links often use IPv6 address of only one AS (if not using link-local per <span>[<a href="#RFC7704" class="xref">RFC7704</a>]</span>). This document uses the following algorithm to attribute the drop to one AS for packet sourced in one AS and then having a path traversing AS#foo just before AS#bar:<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.3-1">Comparing the traceroutes with and without extension headers allows the attribution of a packet drop to one AS. But, this is not an easy task as inter-AS links often use IPv6 address of only one AS (if not using link-local per <span>[<a href="#RFC7704" class="xref">RFC7704</a>]</span>). This document uses the following algorithm to attribute the drop to one AS for packet sourced in one AS and then having a path traversing AS#foo just before AS#bar:<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.1.3-2.1">if the packet drop happens at the first router (i.e., hop limit == 1 does not trigger an ICMP hop-limit exceeded), then the drop is assumed to this AS as it is probably an ingress filter on the first router (i.e., the hosting provider in most of the cases - except if colocated with an IXP).<a href="#section-3.1.3-2.1" class="pilcrow">¶</a>
 </li>
@@ -1514,6 +1526,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 </li>
           </ul>
 <p id="section-3.1.3-3">In several cases, the above algorithm was not possible (e.g., some intermediate routers do not generate an ICMP unreachable hop limit exceeded even in the absence of any extension headers), then the drop is not attributed. Please also note that the goal of this document is not to 'point fingers to operators' but more to evaluate the potential impact. I.e., a tier-1 provider dropping packets with extension headers has a much bigger impact on the Internet traffic than an access provider.<a href="#section-3.1.3-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.3-4">Future revision of this document will use the work of <span>[<a href="#MLAT_PEERING" class="xref">MLAT_PEERING</a>]</span>.<a href="#section-3.1.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1529,7 +1542,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
           <h4 id="name-routing-header">
 <a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-routing-header" class="section-name selfRef">Routing Header</a>
           </h4>
-<p id="section-3.2.1-1">The following table lists all routing header type and the percentage of experiments that were successful, i.e., packets with routing header reaching their destination:<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.1-1">The following table lists all routing header types and the percentage of experiments that were successful, i.e., packets with routing header reaching their destination:<a href="#section-3.2.1-1" class="pilcrow">¶</a></p>
 <table class="center" id="table-3">
             <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
 <thead>
@@ -1659,7 +1672,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
               </tr>
             </tbody>
           </table>
-<p id="section-3.2.2-3">It appears that hop-by-hop options headers cannot reliably traverse the global Internet only small headers with 'skippable' options have some chances. If the hop-by-hop options has the 'discard' bits, it is dropped per specification.<a href="#section-3.2.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2.2-3">It appears that hop-by-hop options headers cannot reliably traverse the global Internet; only small headers with 'skippable' options have some chances. If the hop-by-hop option has the 'discard' bits, it is dropped per specification.<a href="#section-3.2.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="destination-options-headers">
@@ -1792,11 +1805,11 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <ul class="normal">
 <li class="normal" id="section-3.3-2.1">authentication and non-atomic fragmentation headers can traverse the Internet;<a href="#section-3.3-2.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-3.3-2.2">only routing header types 0 and 4 experiment problems over the Internet, other types have no problems;<a href="#section-3.3-2.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-3.3-2.2">only routing headers types 0 and 4 experiment problems over the Internet, other types have no problems;<a href="#section-3.3-2.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-3.3-2.3">hop-by-hop options header does not traverse the Internet;<a href="#section-3.3-2.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-3.3-2.3">hop-by-hop options headers do not traverse the Internet;<a href="#section-3.3-2.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-3.3-2.4">destination options header is not reliable enough especially large size ones.<a href="#section-3.3-2.4" class="pilcrow">¶</a>
+          <li class="normal" id="section-3.3-2.4">destination options headers are not reliable enough especially large size ones.<a href="#section-3.3-2.4" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-3.3-3">Of course, the next phase of measurement with non-collaborating parties will probably give another view.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
@@ -1873,6 +1886,10 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <dt id="I-D.draft-vyncke-opsec-probe-attribution">[I-D.draft-vyncke-opsec-probe-attribution]</dt>
         <dd>
 <span class="refAuthor">Vyncke, É.</span>, <span class="refAuthor">Donnet, B.</span>, and <span class="refAuthor">J. Iurman</span>, <span class="refTitle">"Attribution of Internet Probes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-vyncke-opsec-probe-attribution-01</span>, <time datetime="2022-03-03" class="refDate">3 March 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-vyncke-opsec-probe-attribution-01">https://datatracker.ietf.org/doc/html/draft-vyncke-opsec-probe-attribution-01</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="MLAT_PEERING">[MLAT_PEERING]</dt>
+        <dd>
+<span class="refAuthor">Giotsas, V.</span>, <span class="refAuthor">Zhou, S.</span>, <span class="refAuthor">Luckie, M.</span>, and <span class="refAuthor">K. Claffy</span>, <span class="refTitle">"Inferring Multilateral Peering"</span>, <span class="seriesInfo">DOI 10.1145/2535372.2535390</span>, <time datetime="2013-12" class="refDate">December 2013</time>, <span>&lt;<a href="https://catalog.caida.org/details/paper/2013_inferring_multilateral_peering/">https://catalog.caida.org/details/paper/2013_inferring_multilateral_peering/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC1753">[RFC1753]</dt>
         <dd>
