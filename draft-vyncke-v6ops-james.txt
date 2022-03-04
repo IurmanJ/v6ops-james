@@ -232,8 +232,8 @@ Table of Contents
                 Table 2: All AS (source/destination/transit)
 
    The table attributes some tier qualification to some ASs based on the
-   Wikipedia page [TIER1], but there are no common way to decide who is
-   a tier-1.  Based on some CAIDA research, all the above (except GO6,
+   Wikipedia page [TIER1], but there is no common way to decide who is a
+   tier-1.  Based on some CAIDA research, all the above (except GO6,
    which is a stub network) are transit providers.
 
    While this document lists some operators, the intent is not to build
@@ -310,7 +310,7 @@ Table of Contents
       1 does not trigger an ICMP hop-limit exceeded), then the drop is
       assumed to this AS as it is probably an ingress filter on the
       first router (i.e., the hosting provider in most of the cases -
-      except if colocated with an IXP).
+      except if collocated with an IXP).
 
    *  if the packet drop happens in AS#foo after one or more hop(s) in
       AS#bar, then the drop is assumed to be in AS#foo ingress filter on
@@ -649,7 +649,7 @@ Acknowledgments
    the free use of their labs.  Other thanks to Fernando Gont who
    indicated a nice IPv6 hosting provider in South America.
 
-   Special thanks as well to professor Benoit Donnet for his support and
+   Special thanks as well to Professor Benoit Donnet for his support and
    advices.  This document would not have existed without his support.
 
 Authors' Addresses

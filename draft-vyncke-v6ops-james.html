@@ -1465,7 +1465,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
             </tbody>
           </table>
 </div>
-<p id="section-3.1.1-3">The table attributes some tier qualification to some ASs based on the Wikipedia page <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>, but there are no common way to decide who is a tier-1. Based on some CAIDA research, all the above (except GO6, which is a stub network) are transit providers.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-3">The table attributes some tier qualification to some ASs based on the Wikipedia page <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>, but there is no common way to decide who is a tier-1. Based on some CAIDA research, all the above (except GO6, which is a stub network) are transit providers.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-4">While this document lists some operators, the intent is not to build a wall of fame or a wall of shame but more to get an idea about which kind of providers drop packets with extension headers and how widespread the drop policy is enforced and where, i.e., in the access provider or in the core of the Internet.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1518,7 +1518,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
           </h4>
 <p id="section-3.1.3-1">Comparing the traceroutes with and without extension headers allows the attribution of a packet drop to one AS. But, this is not an easy task as inter-AS links often use IPv6 address of only one AS (if not using link-local per <span>[<a href="#RFC7704" class="xref">RFC7704</a>]</span>). This document uses the following algorithm to attribute the drop to one AS for packet sourced in one AS and then having a path traversing AS#foo just before AS#bar:<a href="#section-3.1.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.1.3-2.1">if the packet drop happens at the first router (i.e., hop limit == 1 does not trigger an ICMP hop-limit exceeded), then the drop is assumed to this AS as it is probably an ingress filter on the first router (i.e., the hosting provider in most of the cases - except if colocated with an IXP).<a href="#section-3.1.3-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-3.1.3-2.1">if the packet drop happens at the first router (i.e., hop limit == 1 does not trigger an ICMP hop-limit exceeded), then the drop is assumed to this AS as it is probably an ingress filter on the first router (i.e., the hosting provider in most of the cases - except if collocated with an IXP).<a href="#section-3.1.3-2.1" class="pilcrow">¶</a>
 </li>
             <li class="normal" id="section-3.1.3-2.2">if the packet drop happens in AS#foo after one or more hop(s) in AS#bar, then the drop is assumed to be in AS#foo ingress filter on a router with an interface address in AS#foo<a href="#section-3.1.3-2.2" class="pilcrow">¶</a>
 </li>
@@ -1932,7 +1932,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-A-1">The authors want to thank Sander Steffann and Jan Zorz for allowing the free use of their labs. Other thanks to Fernando Gont who indicated a nice IPv6 hosting provider in South America.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<p id="appendix-A-2">Special thanks as well to professor Benoit Donnet for his support and advices. This document would not have existed without his support.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">Special thanks as well to Professor Benoit Donnet for his support and advices. This document would not have existed without his support.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
