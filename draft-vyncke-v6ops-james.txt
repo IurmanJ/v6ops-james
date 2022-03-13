@@ -358,7 +358,7 @@ Table of Contents
     +---------------------+-------------------------------------------+
     | 2                   | 99.5%                                     |
     +---------------------+-------------------------------------------+
-    | 3                   | not tested                                |
+    | 3                   | 99.5%                                     |
     +---------------------+-------------------------------------------+
     | 4                   | 69.0%                                     |
     +---------------------+-------------------------------------------+
@@ -400,10 +400,10 @@ Table of Contents
    in a limited domain.
 
    Other routing header types (1 == deprecated NIMROD [RFC1753], 2 ==
-   mobile IPv6 [RFC6275], and even 5 == CRH-16 and 6 == CRH-
-   32[I-D.draft-bonica-6man-comp-rtg-hdr]) can be transmitted over the
-   global Internet without being dropped (assuming that the 0.5% of
-   dropped packets are within the measurement error).
+   mobile IPv6 [RFC6275], 3 == RPL [RFC6554], and even 5 == CRH-16 and 6
+   == CRH-32[I-D.draft-bonica-6man-comp-rtg-hdr]) can be transmitted
+   over the global Internet without being dropped (assuming that the
+   0.5% of dropped packets are within the measurement error).
 
 3.2.2.  Hop-by-Hop Options Headers
 
@@ -620,6 +620,12 @@ Table of Contents
    [RFC6275]  Perkins, C., Ed., Johnson, D., and J. Arkko, "Mobility
               Support in IPv6", RFC 6275, DOI 10.17487/RFC6275, July
               2011, <https://www.rfc-editor.org/rfc/rfc6275>.
+
+   [RFC6554]  Hui, J., Vasseur, JP., Culler, D., and V. Manral, "An IPv6
+              Routing Header for Source Routes with the Routing Protocol
+              for Low-Power and Lossy Networks (RPL)", RFC 6554,
+              DOI 10.17487/RFC6554, March 2012,
+              <https://www.rfc-editor.org/rfc/rfc6554>.
 
    [RFC7704]  Crocker, D. and N. Clark, "An IETF with Much Diversity and
               Professional Conduct", RFC 7704, DOI 10.17487/RFC7704,
