@@ -2,12 +2,12 @@
 
 
 
-IPv6 Operations                                                E. Vyncke
+IPv6 Operations                                                É. Vyncke
 Internet-Draft                                                     Cisco
 Intended status: Informational                                   R. Léas
-Expires: 5 September 2022                                      J. Iurman
+Expires: 14 September 2022                                     J. Iurman
                                                      Université de Liège
-                                                            4 March 2022
+                                                           13 March 2022
 
 
    Just Another Measurement of Extension header Survivability (JAMES)
@@ -15,9 +15,9 @@ Expires: 5 September 2022                                      J. Iurman
 
 Abstract
 
-   In 2016, [RFC7872] has measured the drop of packets with IPv6
-   extension headers.  This document presents a slightly different
-   methodology with more recent results.  It is still work in progress.
+   In 2016, RFC7872 has measured the drop of packets with IPv6 extension
+   headers.  This document presents a slightly different methodology
+   with more recent results.  It is still work in progress.
 
 About This Document
 
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 September 2022.
+   This Internet-Draft will expire on 14 September 2022.
 
 Copyright Notice
 
@@ -96,7 +96,7 @@ Table of Contents
    extension headers on their transit over the global Internet.  This
    document presents a slightly different methodology with more recent
    results.  Since then, [I-D.draft-ietf-opsec-ipv6-eh-filtering] has
-   provided some recommendations for filtering transit traffic, there
+   provided some recommendations for filtering transit traffic, so there
    may be some changes in providers policies.
 
    It is still work in progress, but the authors wanted to present some
@@ -268,8 +268,7 @@ Table of Contents
       -  one unknown option (two sets with "discard" and "skip" bits)
          for an extension header length of 512 octets.
 
-   *  routing header with routing types from 0 to 6 inclusive (except
-      for type 3);
+   *  routing header with routing types from 0 to 6 inclusive;
 
    *  atomic fragment header (i.e., M-flag = 0 and offset = 0) of
       varying frame length 512, 1280, and 1500 octets;
@@ -290,12 +289,15 @@ Table of Contents
    5.3 of [BCP220], even if multiple PadN options violates section
    2.1.9.5 of [RFC4942].
 
-   Next phases will also include packets without UDP/TCP transport
-   header but with Next-Header being:
+   In addition to the above extension headers, other probes were sent
+   with next header field of IPv6 header set to:
 
-   *  59, "no next header" see section 4.7 of [RFC8200];
+   *  59, which is "no next header", especially whether extra octets
+      after the no next header as section 4.7 [RFC8200] requires that
+      "those octets must be ignored and passed on unchanged if the
+      packet is forwarded";
 
-   *  143, "ethernet" see section 4.9 of [RFC8986].
+   *  143, which is Ethernet payload (see section 10.1 of [RFC8986]).
 
 3.1.3.  Drop attribution to AS
 
@@ -553,12 +555,6 @@ Table of Contents
               DOI 10.17487/RFC8200, July 2017,
               <https://www.rfc-editor.org/rfc/rfc8200>.
 
-   [RFC8986]  Filsfils, C., Ed., Camarillo, P., Ed., Leddy, J., Voyer,
-              D., Matsushima, S., and Z. Li, "Segment Routing over IPv6
-              (SRv6) Network Programming", RFC 8986,
-              DOI 10.17487/RFC8986, February 2021,
-              <https://www.rfc-editor.org/rfc/rfc8986>.
-
 6.2.  Informative References
 
    [ALEXA]    "The top 500 sites on the web", n.d.,
@@ -639,6 +635,12 @@ Table of Contents
               Matsushima, S., and D. Voyer, "IPv6 Segment Routing Header
               (SRH)", RFC 8754, DOI 10.17487/RFC8754, March 2020,
               <https://www.rfc-editor.org/rfc/rfc8754>.
+
+   [RFC8986]  Filsfils, C., Ed., Camarillo, P., Ed., Leddy, J., Voyer,
+              D., Matsushima, S., and Z. Li, "Segment Routing over IPv6
+              (SRv6) Network Programming", RFC 8986,
+              DOI 10.17487/RFC8986, February 2021,
+              <https://www.rfc-editor.org/rfc/rfc8986>.
 
    [TIER1]    "Tier 1 network", n.d.,
               <https://en.wikipedia.org/wiki/Tier_1_network>.
