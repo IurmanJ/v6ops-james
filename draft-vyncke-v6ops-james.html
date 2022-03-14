@@ -1019,7 +1019,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Vyncke, et al.</td>
-<td class="center">Expires 14 September 2022</td>
+<td class="center">Expires 15 September 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1032,12 +1032,12 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <dd class="internet-draft">draft-vyncke-v6ops-james-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-03-13" class="published">13 March 2022</time>
+<time datetime="2022-03-14" class="published">14 March 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-09-14">14 September 2022</time></dd>
+<dd class="expires"><time datetime="2022-09-15">15 September 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1094,7 +1094,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 14 September 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 15 September 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1162,7 +1162,10 @@ svg [stroke="fill"], svg [fill^="#fff"] {
                     <p id="section-toc.1-1.3.2.2.2.4.1"><a href="#section-3.2.4" class="xref">3.2.4</a>.  <a href="#name-fragmentation-header" class="xref">Fragmentation Header</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.5">
-                    <p id="section-toc.1-1.3.2.2.2.5.1"><a href="#section-3.2.5" class="xref">3.2.5</a>.  <a href="#name-no-drop-at-all" class="xref">No drop at all</a></p>
+                    <p id="section-toc.1-1.3.2.2.2.5.1"><a href="#section-3.2.5" class="xref">3.2.5</a>.  <a href="#name-no-extension-headers-drop-a" class="xref">No extension headers drop at all</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.6">
+                    <p id="section-toc.1-1.3.2.2.2.6.1"><a href="#section-3.2.6" class="xref">3.2.6</a>.  <a href="#name-special-next-header" class="xref">Special Next Header</a></p>
 </li>
                 </ul>
 </li>
@@ -1235,7 +1238,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
         <h3 id="name-vantage-points">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-vantage-points" class="section-name selfRef">Vantage Points</a>
         </h3>
-<p id="section-3.1-1">Several servers were used worldwide (albeit missing Africa and China as authors were unable to find IPv6 servers in these regions). <a href="#table_vantage" class="xref">Table 1</a> lists all the vantage points together with their AS number and country.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">Several servers were used worldwide (albeit missing Africa and China as the authors were unable to find IPv6 servers in these regions). <a href="#table_vantage" class="xref">Table 1</a> lists all the vantage points together with their AS number and country.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <span id="name-all-vantage-as"></span><div id="table_vantage">
 <table class="center" id="table-1">
           <caption>
@@ -1744,10 +1747,10 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <p id="section-3.2.4-3">The size of the overall IP packets (512, 1280, and 1500 octets) does not have any impact on the propagation.<a href="#section-3.2.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="no-drop-at-all">
+<div id="no-extension-headers-drop-at-all">
 <section id="section-3.2.5">
-          <h4 id="name-no-drop-at-all">
-<a href="#section-3.2.5" class="section-number selfRef">3.2.5. </a><a href="#name-no-drop-at-all" class="section-name selfRef">No drop at all</a>
+          <h4 id="name-no-extension-headers-drop-a">
+<a href="#section-3.2.5" class="section-number selfRef">3.2.5. </a><a href="#name-no-extension-headers-drop-a" class="section-name selfRef">No extension headers drop at all</a>
           </h4>
 <p id="section-3.2.5-1">Finally, some ASs do not drop transit traffic (except for routing header type 0) and follow the recommendations of <span>[<a href="#I-D.draft-ietf-opsec-ipv6-eh-filtering" class="xref">I-D.draft-ietf-opsec-ipv6-eh-filtering</a>]</span>. This list includes tier-1 transit providers (using the "regional" tag per <span>[<a href="#TIER1" class="xref">TIER1</a>]</span>):<a href="#section-3.2.5-1" class="pilcrow">¶</a></p>
 <table class="center" id="table-9">
@@ -1792,6 +1795,34 @@ svg [stroke="fill"], svg [fill^="#fff"] {
               </tr>
             </tbody>
           </table>
+</section>
+</div>
+<div id="special-next-header">
+<section id="section-3.2.6">
+          <h4 id="name-special-next-header">
+<a href="#section-3.2.6" class="section-number selfRef">3.2.6. </a><a href="#name-special-next-header" class="section-name selfRef">Special Next Header</a>
+          </h4>
+<p id="section-3.2.6-1">Measurements also include two protocol numbers that are mainly new use of IPv6. The table below indicates the percentage of packets reaching  the destination.<a href="#section-3.2.6-1" class="pilcrow">¶</a></p>
+<table class="center" id="table-10">
+            <caption><a href="#table-10" class="selfRef">Table 10</a></caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">Next Header</th>
+                <th class="text-left" rowspan="1" colspan="1">%-age of experiments reaching destination</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">NoNextHeader (59)</td>
+                <td class="text-left" rowspan="1" colspan="1">99.7%</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">Ethernet (143)</td>
+                <td class="text-left" rowspan="1" colspan="1">99.2%</td>
+              </tr>
+            </tbody>
+          </table>
+<p id="section-3.2.6-3">The above indicates that those IP protocols can be transmitted over the global Internet without being dropped (assuming that the 0.2-0.8% of dropped packets are within the measurement error).<a href="#section-3.2.6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

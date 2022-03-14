@@ -5,9 +5,9 @@
 IPv6 Operations                                                É. Vyncke
 Internet-Draft                                                     Cisco
 Intended status: Informational                                   R. Léas
-Expires: 14 September 2022                                     J. Iurman
+Expires: 15 September 2022                                     J. Iurman
                                                      Université de Liège
-                                                           13 March 2022
+                                                           14 March 2022
 
 
    Just Another Measurement of Extension header Survivability (JAMES)
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 September 2022.
+   This Internet-Draft will expire on 15 September 2022.
 
 Copyright Notice
 
@@ -80,7 +80,8 @@ Table of Contents
        3.2.2.  Hop-by-Hop Options Headers
        3.2.3.  Destination Options Headers
        3.2.4.  Fragmentation Header
-       3.2.5.  No drop at all
+       3.2.5.  No extension headers drop at all
+       3.2.6.  Special Next Header
      3.3.  Summary of the collaborating parties measurements
    4.  Security Considerations
    5.  IANA Considerations
@@ -133,7 +134,7 @@ Table of Contents
 3.1.  Vantage Points
 
    Several servers were used worldwide (albeit missing Africa and China
-   as authors were unable to find IPv6 servers in these regions).
+   as the authors were unable to find IPv6 servers in these regions).
    Table 1 lists all the vantage points together with their AS number
    and country.
 
@@ -484,7 +485,7 @@ Table of Contents
    The size of the overall IP packets (512, 1280, and 1500 octets) does
    not have any impact on the propagation.
 
-3.2.5.  No drop at all
+3.2.5.  No extension headers drop at all
 
    Finally, some ASs do not drop transit traffic (except for routing
    header type 0) and follow the recommendations of
@@ -511,6 +512,26 @@ Table of Contents
    +-----------+---------------------------------------+---------------+
 
                                   Table 9
+
+3.2.6.  Special Next Header
+
+   Measurements also include two protocol numbers that are mainly new
+   use of IPv6.  The table below indicates the percentage of packets
+   reaching the destination.
+
+     +===================+===========================================+
+     | Next Header       | %-age of experiments reaching destination |
+     +===================+===========================================+
+     | NoNextHeader (59) | 99.7%                                     |
+     +-------------------+-------------------------------------------+
+     | Ethernet (143)    | 99.2%                                     |
+     +-------------------+-------------------------------------------+
+
+                                  Table 10
+
+   The above indicates that those IP protocols can be transmitted over
+   the global Internet without being dropped (assuming that the 0.2-0.8%
+   of dropped packets are within the measurement error).
 
 3.3.  Summary of the collaborating parties measurements
 
