@@ -1019,7 +1019,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Vyncke, et al.</td>
-<td class="center">Expires 15 September 2022</td>
+<td class="center">Expires 18 September 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1032,12 +1032,12 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <dd class="internet-draft">draft-vyncke-v6ops-james-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-03-14" class="published">14 March 2022</time>
+<time datetime="2022-03-17" class="published">17 March 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-09-15">15 September 2022</time></dd>
+<dd class="expires"><time datetime="2022-09-18">18 September 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1094,7 +1094,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 15 September 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 18 September 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1165,7 +1165,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
                     <p id="section-toc.1-1.3.2.2.2.5.1"><a href="#section-3.2.5" class="xref">3.2.5</a>.  <a href="#name-no-extension-headers-drop-a" class="xref">No extension headers drop at all</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.6">
-                    <p id="section-toc.1-1.3.2.2.2.6.1"><a href="#section-3.2.6" class="xref">3.2.6</a>.  <a href="#name-special-next-header" class="xref">Special Next Header</a></p>
+                    <p id="section-toc.1-1.3.2.2.2.6.1"><a href="#section-3.2.6" class="xref">3.2.6</a>.  <a href="#name-special-next-headers" class="xref">Special Next Headers</a></p>
 </li>
                 </ul>
 </li>
@@ -1697,7 +1697,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">8</td>
                 <td class="text-left" rowspan="1" colspan="1">No</td>
-                <td class="text-left" rowspan="1" colspan="1">99.2%</td>
+                <td class="text-left" rowspan="1" colspan="1">99.3%</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">256</td>
@@ -1774,16 +1774,6 @@ svg [stroke="fill"], svg [fill^="#fff"] {
                 <td class="text-left" rowspan="1" colspan="1"> </td>
               </tr>
               <tr>
-                <td class="text-left" rowspan="1" colspan="1">6762</td>
-                <td class="text-left" rowspan="1" colspan="1">SEABONE-NET TELECOM ITALIA SPARKLE S.p.A., IT</td>
-                <td class="text-left" rowspan="1" colspan="1">Tier-1</td>
-              </tr>
-              <tr>
-                <td class="text-left" rowspan="1" colspan="1">14061</td>
-                <td class="text-left" rowspan="1" colspan="1">DIGITALOCEAN-ASN, US</td>
-                <td class="text-left" rowspan="1" colspan="1"> </td>
-              </tr>
-              <tr>
                 <td class="text-left" rowspan="1" colspan="1">21283</td>
                 <td class="text-left" rowspan="1" colspan="1">A1SI-AS A1 Slovenija, SI</td>
                 <td class="text-left" rowspan="1" colspan="1"> </td>
@@ -1795,16 +1785,44 @@ svg [stroke="fill"], svg [fill^="#fff"] {
               </tr>
             </tbody>
           </table>
-</section>
-</div>
-<div id="special-next-header">
-<section id="section-3.2.6">
-          <h4 id="name-special-next-header">
-<a href="#section-3.2.6" class="section-number selfRef">3.2.6. </a><a href="#name-special-next-header" class="section-name selfRef">Special Next Header</a>
-          </h4>
-<p id="section-3.2.6-1">Measurements also include two protocol numbers that are mainly new use of IPv6. The table below indicates the percentage of packets reaching  the destination.<a href="#section-3.2.6-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.5-3">Some ASs also drop only large (more than 8 octets) destination options headers:<a href="#section-3.2.5-3" class="pilcrow">¶</a></p>
 <table class="center" id="table-10">
             <caption><a href="#table-10" class="selfRef">Table 10</a></caption>
+<thead>
+              <tr>
+                <th class="text-left" rowspan="1" colspan="1">AS Number</th>
+                <th class="text-left" rowspan="1" colspan="1">AS Description</th>
+                <th class="text-left" rowspan="1" colspan="1">Largest Forwarded Dest.Opt.  Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">6453</td>
+                <td class="text-left" rowspan="1" colspan="1">Tata Communication </td>
+                <td class="text-left" rowspan="1" colspan="1"> 8</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">1299</td>
+                <td class="text-left" rowspan="1" colspan="1">TWELVE99 Twelve99, Telia Carrier, SE</td>
+                <td class="text-left" rowspan="1" colspan="1">8</td>
+              </tr>
+              <tr>
+                <td class="text-left" rowspan="1" colspan="1">174</td>
+                <td class="text-left" rowspan="1" colspan="1">COGENT-174, US</td>
+                <td class="text-left" rowspan="1" colspan="1">8</td>
+              </tr>
+            </tbody>
+          </table>
+</section>
+</div>
+<div id="special-next-headers">
+<section id="section-3.2.6">
+          <h4 id="name-special-next-headers">
+<a href="#section-3.2.6" class="section-number selfRef">3.2.6. </a><a href="#name-special-next-headers" class="section-name selfRef">Special Next Headers</a>
+          </h4>
+<p id="section-3.2.6-1">Measurements also include two protocol numbers that are mainly new use of IPv6. The table below indicates the percentage of packets reaching  the destination.<a href="#section-3.2.6-1" class="pilcrow">¶</a></p>
+<table class="center" id="table-11">
+            <caption><a href="#table-11" class="selfRef">Table 11</a></caption>
 <thead>
               <tr>
                 <th class="text-left" rowspan="1" colspan="1">Next Header</th>
@@ -1897,6 +1915,10 @@ svg [stroke="fill"], svg [fill^="#fff"] {
             <span class="refAuthor">Chown, T.</span>, <span class="refAuthor">Loughney, J.</span>, and <span class="refAuthor">T. Winters</span>, <span class="refTitle">"IPv6 Node Requirements"</span>, <span class="seriesInfo">BCP 220</span>, <span class="seriesInfo">RFC 8504</span>, <time datetime="2019-01" class="refDate">January 2019</time>. </div>
 <span>&lt;<a href="https://www.rfc-editor.org/info/bcp220">https://www.rfc-editor.org/info/bcp220</a>&gt;</span>
 </dd>
+<dd class="break"></dd>
+<dt id="GITHUB">[GITHUB]</dt>
+        <dd>
+<span class="refAuthor">Léas, R.</span>, <span class="refTitle">"james"</span>, <span>n.d.</span>, <span>&lt;<a href="https://gitlab.uliege.be/Benoit.Donnet/james">https://gitlab.uliege.be/Benoit.Donnet/james</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.draft-bonica-6man-comp-rtg-hdr">[I-D.draft-bonica-6man-comp-rtg-hdr]</dt>
         <dd>

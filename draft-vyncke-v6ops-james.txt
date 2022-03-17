@@ -5,9 +5,9 @@
 IPv6 Operations                                                É. Vyncke
 Internet-Draft                                                     Cisco
 Intended status: Informational                                   R. Léas
-Expires: 15 September 2022                                     J. Iurman
+Expires: 18 September 2022                                     J. Iurman
                                                      Université de Liège
-                                                           14 March 2022
+                                                           17 March 2022
 
 
    Just Another Measurement of Extension header Survivability (JAMES)
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 September 2022.
+   This Internet-Draft will expire on 18 September 2022.
 
 Copyright Notice
 
@@ -81,7 +81,7 @@ Table of Contents
        3.2.3.  Destination Options Headers
        3.2.4.  Fragmentation Header
        3.2.5.  No extension headers drop at all
-       3.2.6.  Special Next Header
+       3.2.6.  Special Next Headers
      3.3.  Summary of the collaborating parties measurements
    4.  Security Considerations
    5.  IANA Considerations
@@ -448,7 +448,7 @@ Table of Contents
              | Length | Multiple PadN | %-age of experiments |
              |        |               | reaching destination |
              +========+===============+======================+
-             | 8      | No            | 99.2%                |
+             | 8      | No            | 99.3%                |
              +--------+---------------+----------------------+
              | 256    | No            | 2.6%                 |
              +--------+---------------+----------------------+
@@ -501,11 +501,6 @@ Table of Contents
    | 4755      | TATACOMM-AS TATA Communications       |               |
    |           | formerly VSNL is Leading ISP, IN      |               |
    +-----------+---------------------------------------+---------------+
-   | 6762      | SEABONE-NET TELECOM ITALIA SPARKLE    | Tier-1        |
-   |           | S.p.A., IT                            |               |
-   +-----------+---------------------------------------+---------------+
-   | 14061     | DIGITALOCEAN-ASN, US                  |               |
-   +-----------+---------------------------------------+---------------+
    | 21283     | A1SI-AS A1 Slovenija, SI              |               |
    +-----------+---------------------------------------+---------------+
    | 60011     | MYTHIC-BEASTS-USA, GB                 |               |
@@ -513,7 +508,25 @@ Table of Contents
 
                                   Table 9
 
-3.2.6.  Special Next Header
+   Some ASs also drop only large (more than 8 octets) destination
+   options headers:
+
+          +===========+====================+===================+
+          | AS Number | AS Description     | Largest Forwarded |
+          |           |                    | Dest.Opt.  Size   |
+          +===========+====================+===================+
+          | 6453      | Tata               |  8                |
+          |           | Communication      |                   |
+          +-----------+--------------------+-------------------+
+          | 1299      | TWELVE99 Twelve99, | 8                 |
+          |           | Telia Carrier, SE  |                   |
+          +-----------+--------------------+-------------------+
+          | 174       | COGENT-174, US     | 8                 |
+          +-----------+--------------------+-------------------+
+
+                                 Table 10
+
+3.2.6.  Special Next Headers
 
    Measurements also include two protocol numbers that are mainly new
    use of IPv6.  The table below indicates the percentage of packets
@@ -527,7 +540,7 @@ Table of Contents
      | Ethernet (143)    | 99.2%                                     |
      +-------------------+-------------------------------------------+
 
-                                  Table 10
+                                  Table 11
 
    The above indicates that those IP protocols can be transmitted over
    the global Internet without being dropped (assuming that the 0.2-0.8%
@@ -585,6 +598,9 @@ Table of Contents
               Requirements", BCP 220, RFC 8504, January 2019.
 
               <https://www.rfc-editor.org/info/bcp220>
+
+   [GITHUB]   Léas, R., "james", n.d.,
+              <https://gitlab.uliege.be/Benoit.Donnet/james>.
 
    [I-D.draft-bonica-6man-comp-rtg-hdr]
               Bonica, R., Kamite, Y., Alston, A., Henriques, D., and L.
